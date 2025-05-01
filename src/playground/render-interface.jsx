@@ -64,7 +64,12 @@ if (process.env.ANNOUNCEMENT) {
 
 const handleClickAddonSettings = () => {
     const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
-    window.open(`${process.env.ROOT}${path}`);
+    new window.__TAURI__.window.WebviewWindow("addons", {
+        url: path, // Replace with your desired URL or local HTML file
+        title: "PenguinMod Desktop - Addons",
+        width: 800,
+        height: 600,
+      });
 };
 
 const xmlEscape = function (unsafe) {
