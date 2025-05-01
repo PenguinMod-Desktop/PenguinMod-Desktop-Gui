@@ -64,7 +64,7 @@ if (process.env.ANNOUNCEMENT) {
 
 const handleClickAddonSettings = () => {
     const path = process.env.ROUTING_STYLE === 'wildcard' ? 'addons' : 'addons.html';
-    new window.__TAURI__.window.WebviewWindow("addons", {
+    new window.__TAURI__.webviewWindow.WebviewWindow("addons", {
         url: path, // Replace with your desired URL or local HTML file
         title: "PenguinMod Desktop - Addons",
         width: 800,
