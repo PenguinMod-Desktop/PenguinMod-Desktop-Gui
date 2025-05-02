@@ -1,8 +1,8 @@
 function forwardConsole(fnName, otherFnName) {
     const original = console[fnName];
-    console[fnName] = (message) => {
-        original(message);
-        window.__TAURI__.log[otherFnName](message);
+    console[fnName] = (...message) => {
+        original(...message);
+        window.__TAURI__.log[otherFnName](message.reduce((t, c) => t + ' ' + c.toString(), ''));
     };
 }
 
