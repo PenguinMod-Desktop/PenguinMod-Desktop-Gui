@@ -894,6 +894,15 @@ const menuItems = [
         featured: true
     },
     {
+        name: 'Webview Window',
+        extensionId: 'tauriWebview',
+        iconURL: defaultExtensionIcon,
+        tags: ['penguinmod-desktop'],
+        description: 'Allows creating and modifing webview windows.',
+        extDeveloper: 'SCsupercraft',
+        featured: true
+    },
+    {
         name: 'micro:bit',
         extensionId: 'microbit',
         collaborator: 'micro:bit',

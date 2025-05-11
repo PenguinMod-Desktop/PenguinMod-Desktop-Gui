@@ -141,6 +141,11 @@ export default defineMessages({
         description: 'Tag for filtering a library for guns',
         id: 'gui.libraryTags.guns'
     },
+    penguinmodDesktop: {
+        defaultMessage: 'PenguinMod Desktop',
+        description: 'Tag for filtering a library by PenguinMod Desktop',
+        id: 'gui.libraryTags.penguinmodDesktop'
+    },
     penguinmod: {
         defaultMessage: 'PenguinMod',
         description: 'Tag for filtering a library by PenguinMod',

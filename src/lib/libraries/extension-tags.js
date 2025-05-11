@@ -1,5 +1,6 @@
 import messages from './tag-messages.js';
 export default [
+    { tag: 'penguinmod-desktop', intlLabel: messages.penguinmodDesktop },
     { tag: 'penguinmod', intlLabel: messages.penguinmod },
     { tag: 'turbowarp', intlLabel: messages.turbowarp },
     { tag: 'scratch', intlLabel: messages.scratch },
