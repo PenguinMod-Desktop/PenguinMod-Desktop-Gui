@@ -106,7 +106,7 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                         rawData.public === true
                     ) {
                         this.props.onSetExtraProjectInfo(
-                            rawData.public,
+                            !rawData.softRejected,
                             String(rawData.remix) !== '0',
                             String(rawData.remix),
                             false,
