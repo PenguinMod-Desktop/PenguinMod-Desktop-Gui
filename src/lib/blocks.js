@@ -115,8 +115,20 @@ export default function (vm) {
     };
 
     const costumesMenu = function () {
+        const next = ScratchBlocks.ScratchMsgs.translate('LOOKS_NEXTCOSTUME', 'next costume');
+        const previous = "previous costume" //ScratchBlocks.ScratchMsgs.translate('LOOKS_PREVIOUSCOSTUME', 'previous costume');
+        // TODO: Add translation index into ScratchBlocks for this.
+
+        const random = "random costume"//ScratchBlocks.ScratchMsgs.translate('LOOKS_RANDOMBACKDROP', 'random costume');
+        // TODO: Add translation entry
         if (vm.editingTarget && vm.editingTarget.getCostumes().length > 0) {
-            return vm.editingTarget.getCostumes().map(costume => [costume.name, costume.name]);
+            return vm.editingTarget.getCostumes().map(costume => [costume.name, costume.name])
+                .concat([
+                    [next, "next costume"],
+                    [previous, "previous costume"],
+                    [random, "random costume"]
+                ])
+            ;
         }
         return [['', '']];
     };

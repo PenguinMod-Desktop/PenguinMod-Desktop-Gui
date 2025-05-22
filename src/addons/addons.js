@@ -77,6 +77,7 @@ const newAddons = [
     'sprite-properties',
     'paint-snap',
     "editor-block-chomping",
+    "paint-gradient-maker"
 ];
 
 // eslint-disable-next-line import/no-commonjs
