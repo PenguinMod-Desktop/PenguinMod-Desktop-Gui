@@ -20,6 +20,7 @@ import {
 import {generateRandomUsername} from './tw-username';
 import {setSearchParams} from './tw-navigation-utils';
 import {defaultStageSize} from '../reducers/custom-stage-size';
+import { DesktopSettings } from './settings-store';
 
 /* eslint-disable no-alert */
 
@@ -358,7 +359,7 @@ const TWStateManager = function (WrappedComponent) {
             }
             */
 
-            if (urlParams.has('livetests') || String(window.location.href).startsWith(`http://localhost:`)) {
+            if (urlParams.has('livetests') || String(window.location.href).startsWith(`http://localhost:`) || DesktopSettings.get("livetests")) {
                 // massive mega brained hack bc i cant figure out how to make a state
                 // ok so now i do know how to make it a state but because of the way
                 // this is used + pure laziness this wont be changing

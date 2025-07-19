@@ -167,11 +167,12 @@ import pmOperatorsExpansionExtensionIcon from './penguinmod/extensions/operators
 // jg: default icon if you are too lazy to make one and you want me to make one instead lololololololol
 // gsa: ololololololo
 import defaultExtensionIcon from './penguinmod/extensions/placeholder.png';
+import { DesktopSettings } from '../../settings-store';
 
 const urlParams = new URLSearchParams(location.search);
 
 const IsLocal = String(window.location.href).startsWith(`http://localhost:`);
-const IsLiveTests = urlParams.has('livetests');
+const IsLiveTests = urlParams.has('livetests') || DesktopSettings.get("livetests");
 
 const menuItems = [
     {
@@ -894,15 +895,6 @@ const menuItems = [
         featured: true
     },
     {
-        name: 'Webview Window',
-        extensionId: 'tauriWebview',
-        iconURL: defaultExtensionIcon,
-        tags: ['penguinmod-desktop'],
-        description: 'Allows creating and modifing webview windows.',
-        extDeveloper: 'SCsupercraft',
-        featured: true
-    },
-    {
         name: 'micro:bit',
         extensionId: 'microbit',
         collaborator: 'micro:bit',
@@ -1508,7 +1500,16 @@ if (IsLocal || IsLiveTests) {
             description: 'In development.',
             credits: 'Vadik1',
             featured: true
-        }
+        },
+        {
+        name: 'Webview Window',
+        extensionId: 'tauriWebview',
+        iconURL: defaultExtensionIcon,
+        tags: ['penguinmod-desktop'],
+        description: 'Allows creating and modifing webview windows. (PenguinMod Desktop Only!)',
+        extDeveloper: 'SCsupercraft',
+        featured: true
+    },
     ];
     extras.forEach(ext => {
         menuItems.push(ext);

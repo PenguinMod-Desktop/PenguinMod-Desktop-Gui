@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import {closeSettingsModal} from '../reducers/modals';
 import SettingsModalComponent from '../components/tw-settings-modal/settings-modal.jsx';
 import {defaultStageSize} from '../reducers/custom-stage-size';
+import { DesktopSettings } from '../lib/settings-store.js';
 
 const messages = defineMessages({
     newFramerate: {
@@ -33,7 +34,8 @@ class UsernameModal extends React.Component {
             'handleDisableCompilerChange',
             'handleStoreProjectOptions',
             'handleEnableDangerousOptimizationsChange',
-            'handleDisableOffscreenRenderingChange'
+            'handleDisableOffscreenRenderingChange',
+            'handleLiveTestsChange'
         ]);
     }
     handleFramerateChange (e) {
@@ -111,6 +113,13 @@ class UsernameModal extends React.Component {
     handleStoreProjectOptions () {
         this.props.vm.storeProjectOptions();
     }
+    handleLiveTestsChange (e) {
+        DesktopSettings.update("livetests", e.target.checked);
+        alert('A restart is required for the change to take effect!')
+    }
+    getIsLiveTests() {
+        return DesktopSettings.get("livetests");
+    }
     render () {
         const {
             /* eslint-disable no-unused-vars */
@@ -136,6 +145,8 @@ class UsernameModal extends React.Component {
                 onStageHeightChange={this.handleStageHeightChange}
                 onStagePresetUsed={this.handleStagePresetUsed}
                 onDisableCompilerChange={this.handleDisableCompilerChange}
+                onLiveTestsChange={this.handleLiveTestsChange}
+                isLiveTest={this.getIsLiveTests}
                 stageWidth={this.props.customStageSize.width}
                 stageHeight={this.props.customStageSize.height}
                 customStageSizeEnabled={

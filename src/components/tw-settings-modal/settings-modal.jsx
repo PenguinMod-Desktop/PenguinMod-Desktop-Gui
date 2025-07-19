@@ -469,6 +469,27 @@ StoreProjectOptions.propTypes = {
     onStoreProjectOptions: PropTypes.func
 };
 
+const LiveTests = props => (
+    <BooleanSetting
+        {...props}
+        label={
+            <FormattedMessage
+                defaultMessage="Livetests"
+                description="Livetests setting"
+                id="tw.settingsModal.livetests"
+            />
+        }
+        help={
+            <FormattedMessage
+                // eslint-disable-next-line max-len
+                defaultMessage="Enables live tests! Use with caution."
+                description="Livetests setting help"
+                id="tw.settingsModal.livetestsHelp"
+            />
+        }
+    />
+);
+
 const Header = props => (
     <div className={styles.header}>
         {props.children}
@@ -587,6 +608,22 @@ const SettingsModalComponent = props => (
                     onChange={props.onInterpolationChange}
                 />
             </details>
+            <details>
+                <summary className={styles.summary}>
+                    <Header>
+                        <span className={styles.dropdown}>⯈</span>
+                        <FormattedMessage
+                            defaultMessage="Desktop Settings"
+                            description="Settings for the desktop application"
+                            id="pm.settingsModal.desktopSettings"
+                        />
+                    </Header>
+                </summary>
+                <LiveTests
+                    value={props.isLiveTest()}
+                    onChange={props.onLiveTestsChange}
+                />
+            </details>
         </Box>
     </Modal>
 );
@@ -613,6 +650,8 @@ SettingsModalComponent.propTypes = {
     disableCompiler: PropTypes.bool,
     dangerousOptimizations: PropTypes.bool,
     onDisableCompilerChange: PropTypes.func,
+    onLiveTestsChange: PropTypes.func,
+    isLiveTest: PropTypes.func,
     onEnableDangerousOptimizationsChange: PropTypes.func,
     disableOffscreenRendering: PropTypes.bool,
     onDisableOffscreenRenderingChange: PropTypes.func
