@@ -20,7 +20,10 @@ module.exports = {
         'operator-linebreak': 'off',
         'no-console': 'off',
         'space-before-function-paren': 'off',
-        'no-lonely-if': 'off'
+        'no-lonely-if': 'off',
+        'space-infix-ops': 'off', // so dumb
+        'object-curly-spacing': 'off',
+        'curly': 'off'
     },
     settings: {
         react: {

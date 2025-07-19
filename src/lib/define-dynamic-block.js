@@ -87,21 +87,75 @@ const defineDynamicBlock = (ScratchBlocks, categoryInfo, staticBlockInfo, extend
         // Layout block arguments
         // TODO handle E/C Blocks
         const blockText = blockInfo.text;
-        const args = [];
+        const args = {};
         let argCount = 0;
         const scratchBlocksStyleText = blockText.replace(/\[(.+?)]/g, (match, argName) => {
             const arg = blockInfo.arguments[argName];
             switch (arg.type) {
+            default: // bruh
             case ArgumentType.STRING:
-                args.push({type: 'input_value', name: argName});
+                args[argName] = { type: 'input_value', name: argName };
                 break;
             case ArgumentType.BOOLEAN:
-                args.push({type: 'input_value', name: argName, check: 'Boolean'});
+                args[argName] = { type: 'input_value', name: argName, check: 'Boolean' };
                 break;
+            }
+            if (arg.menu && !categoryInfo.menuInfo[arg.menu].acceptsReporters) {
+                args[argName].type = 'field_dropdown';
+                args[argName].options = categoryInfo.menuInfo[arg.menu].items;
+                args[argName].value = categoryInfo.menuInfo[arg.menu].items[0][1];
             }
             return `%${++argCount}`;
         });
-        this.interpolate_(scratchBlocksStyleText, args);
+        this.interpolate_(scratchBlocksStyleText, Object.values(args));
+        if (this.isInsertionMarker()) return;
+        for (const name in args) {
+            if (args[name].type.startsWith('field_')) continue;
+            const arg = blockInfo.arguments[name];
+            const connection = this.getInput(name).connection;
+            const curBlock = connection.targetConnection?.getParentBlock?.();
+            if (curBlock && curBlock.type !== 'text' && !curBlock.type.startsWith('math_')) continue;
+            if (arg.menu) {
+                const fieldId = `${categoryInfo.id}_menu_${arg.menu}`;
+                if (curBlock?.type === fieldId) continue;
+                if (curBlock) curBlock.dispose();
+                const newBlock = this.workspace.newBlock(fieldId);
+                if (arg.defaultValue) newBlock.getField(arg.menu).setValue(arg.defaultValue);
+                newBlock.setShadow(true);
+                newBlock.initSvg();
+                newBlock.render();
+                continue;
+            }
+            switch (arg.type) {
+            case ArgumentType.STRING: {
+                if (curBlock?.type === 'text') break;
+                if (curBlock) curBlock.dispose();
+                const newBlock = this.workspace.newBlock('text');
+                connection.connect(newBlock.outputConnection);
+                newBlock.getField('TEXT').setValue(arg.defaultValue ?? '');
+                newBlock.setShadow(true);
+                newBlock.initSvg();
+                newBlock.render();
+                break;
+            }
+            case ArgumentType.NUMBER: {
+                if (curBlock && !curBlock.type.startsWith('math_')) break;
+                if (curBlock) curBlock.dispose();
+                const newBlock = this.workspace.newBlock('math_number');
+                connection.connect(newBlock.outputConnection);
+                newBlock.getField('NUM').setValue(arg.defaultValue ?? '');
+                newBlock.setShadow(true);
+                newBlock.initSvg();
+                newBlock.render();
+                break;
+            }
+            case ArgumentType.BOOLEAN: {
+                if (!curBlock) break;
+                curBlock.dispose();
+                break;
+            }
+            }
+        }
     }
 });
 

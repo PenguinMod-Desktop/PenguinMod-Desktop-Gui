@@ -28,6 +28,7 @@ import customStageSizeReducer, {customStageSizeInitialState} from './custom-stag
 import vmReducer, {vmInitialState} from './vm';
 import vmStatusReducer, {vmStatusInitialState} from './vm-status';
 import workspaceMetricsReducer, {workspaceMetricsInitialState} from './workspace-metrics';
+import addonUtilReducer, {addonUtilInitialState} from './addon-util';
 import throttle from 'redux-throttle';
 
 import decks from '../lib/libraries/decks/index.jsx';
@@ -35,6 +36,7 @@ import decks from '../lib/libraries/decks/index.jsx';
 const guiMiddleware = compose(applyMiddleware(throttle(300, {leading: true, trailing: true})));
 
 const guiInitialState = {
+    addonUtil: addonUtilInitialState,
     alerts: alertsInitialState,
     assetDrag: assetDragInitialState,
     blockDrag: blockDragInitialState,
@@ -63,7 +65,7 @@ const guiInitialState = {
     tw: twInitialState,
     vm: vmInitialState,
     vmStatus: vmStatusInitialState,
-    workspaceMetrics: workspaceMetricsInitialState
+    workspaceMetrics: workspaceMetricsInitialState,
 };
 
 const initPlayer = function (currentState) {
@@ -139,6 +141,7 @@ const initTelemetryModal = function (currentState) {
 };
 
 const guiReducer = combineReducers({
+    addonUtil: addonUtilReducer,
     alerts: alertsReducer,
     assetDrag: assetDragReducer,
     blockDrag: blockDragReducer,

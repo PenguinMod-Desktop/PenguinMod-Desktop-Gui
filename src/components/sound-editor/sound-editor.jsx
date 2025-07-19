@@ -19,6 +19,7 @@ import stopIcon from './icon--stop.svg';
 import redoIcon from './icon--redo.svg';
 import undoIcon from './icon--undo.svg';
 import modifyIcon from './icon--modify.svg';
+import formatIcon from './icon--format.svg';
 import fasterIcon from './icon--faster.svg';
 import slowerIcon from './icon--slower.svg';
 import louderIcon from './icon--louder.svg';
@@ -374,6 +375,12 @@ const SoundEditor = props => (
                     title={"High Pass"}
                     onClick={props.onHighPass}
                 />
+                <IconButton
+                    className={styles.effectButton}
+                    img={formatIcon}
+                    title={"Format"}
+                    onClick={props.onFormatSound}
+                />
             </div>
         </div>
         <div className={styles.infoRow}>
@@ -463,6 +470,7 @@ SoundEditor.propTypes = {
     onFadeOut: PropTypes.func.isRequired,
     onFaster: PropTypes.func.isRequired,
     onModifySound: PropTypes.func.isRequired,
+    onFormatSound: PropTypes.func.isRequired,
     onLouder: PropTypes.func.isRequired,
     onMute: PropTypes.func.isRequired,
     onPaste: PropTypes.func.isRequired,

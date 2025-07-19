@@ -59,7 +59,7 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
         }
         componentDidUpdate() {
             // project title resetting is handled in titled-hoc.jsx
-            if (this.props.vm.runtime.renderer.setPrivateSkinAccess)
+            if (this.props.vm.runtime.renderer?.setPrivateSkinAccess)
                 this.props.vm.runtime.renderer.setPrivateSkinAccess(true);
             this.props.onSetAuthor('', '');
             this.props.onSetDescription('', '');
@@ -140,7 +140,7 @@ const TWProjectMetaFetcherHOC = function (WrappedComponent) {
                     setIndexable(true);
                 })
                 .catch(err => {
-                    if (this.props.vm.runtime.renderer.setPrivateSkinAccess)
+                    if (this.props.vm.runtime.renderer?.setPrivateSkinAccess)
                         this.props.vm.runtime.renderer.setPrivateSkinAccess(false);
                     setIndexable(false);
                     if (`${err}`.includes('unshared')) {

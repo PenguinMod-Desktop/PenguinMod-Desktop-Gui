@@ -28,6 +28,12 @@ const messages = defineMessages({
         defaultMessage: 'This extension is incompatible with Scratch. Projects made with it cannot be uploaded to the Scratch website. Are you sure you want to enable it?',
         description: 'Confirm loading Scratch-incompatible extension',
         id: 'tw.confirmIncompatibleExtension'
+    },
+    extensionWarning: {
+        // eslint-disable-next-line max-len
+        defaultMessage: 'This extension is not recommended for real projects. It may be unstable and cause problems with your project later on. Are you sure you want to enable it?',
+        description: 'Confirm loading buggy and unstable extension',
+        id: 'pm.confirmBuggyUnstableExtension'
     }
 });
 
@@ -137,9 +143,10 @@ class ExtensionLibrary extends React.PureComponent {
 
     async handleItemSelect(item) {
         // eslint-disable-next-line no-alert
-        // if (item.incompatibleWithScratch && !confirm(this.props.intl.formatMessage(messages.incompatible))) {
-        //     return;
-        // }
+        if (item.extensionWarningOnImport && !confirm(this.props.intl.formatMessage(messages.extensionWarning))) {
+            return;
+        }
+
         // const id = item.extensionId;
         // let url = item.extensionURL ? item.extensionURL : id;
         // const isCustomURL = !item.disabled && !id;
@@ -147,6 +154,7 @@ class ExtensionLibrary extends React.PureComponent {
         //     // eslint-disable-next-line no-alert
         //     url = prompt(this.props.intl.formatMessage(messages.extensionUrl));
         // }
+        
         const extensionId = item.extensionId;
         const isCustomURL = !item.disabled && !extensionId;
         if (isCustomURL) {

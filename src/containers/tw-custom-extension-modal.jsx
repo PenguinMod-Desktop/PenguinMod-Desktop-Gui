@@ -138,7 +138,6 @@ class CustomExtensionModal extends React.Component {
                     // eslint-disable-next-line no-alert
                     alert('The extension you used for the edit had a different ID than the one you were editing.');
                 }
-                this.props.vm.runtime._removeExtensionPrimitive(this.props.swapId);
                 loadedIds.forEach(extId => {
                     const idx = runtime._blockInfo.findLastIndex(ext => ext.id === extId);
                     const ext = runtime._blockInfo[idx];

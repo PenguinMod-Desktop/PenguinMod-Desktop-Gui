@@ -443,6 +443,7 @@ class LibraryComponent extends React.Component {
                                 credits={dataItem.credits}
                                 twDeveloper={dataItem.twDeveloper}
                                 eventSubmittor={dataItem.eventSubmittor}
+                                extraLabels={dataItem.extraLabels}
                                 customInsetColor={dataItem.customInsetColor}
                                 description={dataItem.description}
                                 disabled={dataItem.disabled}
@@ -461,6 +462,7 @@ class LibraryComponent extends React.Component {
                                 soundType={dataItem.soundType}
                                 soundLength={dataItem.soundLength}
                                 incompatibleWithScratch={dataItem.incompatibleWithScratch}
+                                extensionWarningOnImport={dataItem.extensionWarningOnImport}
                                 insetIconURL={dataItem.insetIconURL}
                                 internetConnectionRequired={dataItem.internetConnectionRequired}
                                 isPlaying={this.state.playingItem === index}

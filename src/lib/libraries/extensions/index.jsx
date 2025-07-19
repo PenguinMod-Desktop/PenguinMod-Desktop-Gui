@@ -68,6 +68,7 @@ import jgJSONExtensionIcon from './penguinmod/extensions/json.png';
 import jgTailgatingExtensionIcon from './penguinmod/extensions/tailgating.png';
 import jgRuntimeExtensionIcon from './penguinmod/extensions/runtime.svg';
 import jgPrismExtensionIcon from './penguinmod/extensions/prism.png';
+import jgDebuggingIcon from './penguinmod/extensions/debugging.svg';
 
 import jwProtoExtensionIcon from './penguinmod/extensions/proto.svg';
 import jwUniteExtensionIcon from './penguinmod/extensions/Unite.png';
@@ -79,6 +80,7 @@ import jwArrayExtensionThumb from './penguinmod/extensions/jwArray.svg';
 import jwTargetsExtensionThumb from './penguinmod/extensions/jwTargets.svg';
 import jwNumExtensionThumb from './penguinmod/extensions/jwNum.svg';
 import jwColorExtensionThumb from './penguinmod/extensions/jwColor.svg';
+import jwVectorExtensionThumb from './penguinmod/extensions/jwVector.svg';
 
 import iygPerlinNoiseExtensionIcon from './penguinmod/extensions/perlinnoisebanner.png';
 
@@ -147,6 +149,7 @@ import sharkpoolMBPIcon from './penguinmod/extensions/myBlocksPlus.svg';
 import sharkpoolBCIcon from './penguinmod/extensions/BetterComments.svg';
 import sharkpoolPEIcon from './penguinmod/extensions/particleEngine.svg';
 import jgScriptsExtensionIcon from './penguinmod/extensions/scripts.svg';
+import sharkpoolLooksExpandedIcon from './penguinmod/extensions/looksExpanded.svg';
 
 // events
 import jgStorageExtensionIcon from './penguinmod/extensions/storage.png';
@@ -384,6 +387,15 @@ const menuItems = [
         tags: ['penguinmod', 'noisemaker'],
         description: 'Make sounds with oscillators!',
         extDeveloper: 'SharkPool',
+        featured: true
+    },
+    {
+        name: 'Looks Expanded',
+        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Looks-Expanded.js',
+        iconURL: sharkpoolLooksExpandedIcon,
+        tags: ['penguinmod', 'categoryexpansion', 'graphics'],
+        description: 'Expansion of the Looks Category.',
+        extDeveloper: 'SharkPool, CST1229',
         featured: true
     },
     {
@@ -799,7 +811,7 @@ const menuItems = [
     },
     {
         name: 'Clipping and Blending',
-        extensionId: 'xeltallivclipblend',
+        extensionId: 'https://extensions.turbowarp.org/Xeltalliv/clippingblending.js',
         iconURL: clippingblending,
         tags: ['turbowarp', 'graphics'],
         insetIconURL: turbowarpIcon,
@@ -891,6 +903,15 @@ const menuItems = [
         iconURL: jwColorExtensionThumb,
         tags: ['penguinmod', 'graphics'],
         description: 'Utilities for anything involving colors.',
+        extDeveloper: 'jwklong',
+        featured: true
+    },
+    {
+        name: 'Vector',
+        extensionId: 'jwVector',
+        iconURL: jwVectorExtensionThumb,
+        tags: ['penguinmod', 'math'],
+        description: 'Vector type for calculating with X and Y coordinates.',
         extDeveloper: 'jwklong',
         featured: true
     },
@@ -1347,7 +1368,7 @@ if (IsLocal || IsLiveTests) {
         {
             name: 'Debugging',
             extensionId: 'jgDebugging',
-            iconURL: defaultExtensionIcon,
+            iconURL: jgDebuggingIcon,
             tags: ['penguinmod'],
             description: 'Log information and run commands. Good for debugging packaged projects or just easily changing things.',
             featured: true
@@ -1408,12 +1429,13 @@ if (IsLocal || IsLiveTests) {
         {
             name: '3D',
             extensionId: 'jg3d',
-            iconURL: jg3dExtensionIcon,
+            iconURL: defaultExtensionIcon,
             tags: ['penguinmod', '3d'],
             customInsetColor: '#B200FF',
             insetIconURL: jg3dInsetExtensionIcon,
-            description: 'Use the magic of 3D to spice up your project.',
-            featured: true
+            description: 'Do not use for real projects. Not recommended, unstable, and will be rewritten/remade entirely at a later date. In development.',
+            featured: true,
+            extensionWarningOnImport: true
         },
         {
             name: '3D Physics',
@@ -1432,8 +1454,9 @@ if (IsLocal || IsLiveTests) {
             tags: ['penguinmod', 'hardware', '3d'],
             customInsetColor: '#B200FF',
             insetIconURL: jg3dVrInsetExtensionIcon,
-            description: 'In development. May break compatibility. Allow players to really jump into your world!',
-            featured: true
+            description: 'Do not use for real projects. Not recommended, unstable, and will be rewritten/remade entirely at a later date. In development. May break compatibility. Allow players to really jump into your world!',
+            featured: true,
+            extensionWarningOnImport: true
         },
         {
             name: 'Interfaces',
@@ -1455,7 +1478,7 @@ if (IsLocal || IsLiveTests) {
             description: 'In development. Do extra things in packaged applications that you can\'t do in the website!',
             featured: true
         },
-        
+
         {
             name: 'Inline Blocks',
             extensionId: 'pmInlineBlocks',
@@ -1498,8 +1521,15 @@ if (IsLocal || IsLiveTests) {
             iconURL: jgVrExtensionIcon,
             tags: ['penguinmod', 'hardware'],
             description: 'In development.',
-            credits: 'Vadik1',
-            featured: true
+            extDeveloper: "JeremyGamer13",
+            extraLabels: [
+                {
+                    name: "Uses code from",
+                    value: "\"Augmented Reality\" by Vadik1"
+                }
+            ],
+            featured: true,
+            extensionWarningOnImport: true
         },
         {
         name: 'Webview Window',

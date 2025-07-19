@@ -486,9 +486,28 @@ export default function (vm) {
         this.jsonInit(json);
     };
 
-    ScratchBlocks.VerticalFlyout.getCheckboxState = function (blockId) {
+    ScratchBlocks.VerticalFlyout.getCheckboxState = function (blockId, inputList) {
         const monitoredBlock = vm.runtime.monitorBlocks._blocks[blockId];
-        return monitoredBlock ? monitoredBlock.isMonitored : false;
+        if (!monitoredBlock)
+            return false;
+
+        const { opcode, fields } = monitoredBlock;
+
+        if (opcode == "data_variable" || opcode == "data_listcontents")
+            return monitoredBlock ? monitoredBlock.isMonitored : false;
+
+        const parsedFields = inputList[0].fieldRow
+            .filter(({ name }) => name in fields)
+            .map(field => {
+                if (field.variable_) return field.variable_.name;
+                return field.name === "CURRENTMENU" ? field.value_.toLowerCase() : field.value_;
+            }).join("_");
+
+        const newBlockId = blockId + (parsedFields.length ? "_" : "") + parsedFields;
+
+        const newMonitoredBlock = vm.runtime.monitorBlocks._blocks[newBlockId];
+
+        return newMonitoredBlock ? newMonitoredBlock.isMonitored : false;
     };
 
     ScratchBlocks.FlyoutExtensionCategoryHeader.getExtensionState = function (extensionId) {
@@ -523,14 +542,24 @@ export default function (vm) {
         return true;
     };
 
-    ScratchBlocks.Toolbox.registerMenu('extensionControls', [
-        {
-            text: 'Remove Extension',
-            enabled: true,
-            callback: ext => vm.extensionManager.removeExtension(ext)
-        }
-        // see src/components/blocks.jsx (just after `VMScratchBlocks(props.vm)`) for Edit Extension
-    ]);
+    // brute force a toolbox update if there are no extensions loaded
+    // Someone made a commit that broke initial toolbox populate calls back in the day
+    // and no one can find it, this brute fixes the problem...
+    vm.runtime.on("PROJECT_LOADED", () => {
+        if (vm.extensionManager._loadedExtensions.size > 0) return;
+
+        const workspace = ScratchBlocks.getMainWorkspace();
+        const toolbox = workspace.getToolbox();
+        if (!toolbox) return;
+        const categoryMenu = toolbox.categoryMenu_;
+        if (!categoryMenu) return;
+        if (categoryMenu.secondTable) return;
+
+        categoryMenu.dispose();
+        categoryMenu.createDom();
+        toolbox.populate_(workspace.options.languageTree);
+        toolbox.position();
+    });
 
     return ScratchBlocks;
 }

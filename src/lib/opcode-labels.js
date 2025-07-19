@@ -222,6 +222,11 @@ const messages = defineMessages({
         description: 'Label for the current second monitor when shown on the stage',
         id: 'gui.opcodeLabels.second'
     },
+    sensing_current_timestamp: {
+        defaultMessage: 'js timestamp',
+        description: 'Label for the current js timestamp monitor when shown on the stage',
+        id: 'gui.opcodeLabels.timestamp'
+    },
     sensing_timer: {
         defaultMessage: 'timer',
         description: 'Label for the timer monitor when shown on the stage',
@@ -433,6 +438,8 @@ class OpcodeLabels {
                 return this._translator(messages.sensing_current_minute);
             case 'second':
                 return this._translator(messages.sensing_current_second);
+            case 'timestamp':
+                return this._translator(messages.sensing_current_timestamp)
             }
         };
         this._opcodeMap.sensing_timer.labelFn = () => this._translator(messages.sensing_timer);

@@ -192,6 +192,11 @@ const pmPullRequestDevelopers = [ // these people made a PR that got merged, or 
         image: `https://github.com/DogeisCut.png`,
         href: `https://github.com/Dogeiscut/`,
     },
+    {
+        text: 'BiglyDerv',
+        image: `https://github.com/biglyderv.png`,
+        href: `https://github.com/biglyderv/`,
+    }
     // list could be missing some people, but theres not really a way to tell
 ];
 
@@ -215,48 +220,38 @@ const pmTranslators = [
         href: "https://studio.penguinmod.com/credits.html#",
     },
     {
-        text: 'a_pc',
-        image: `https://penguinmod.com/unknown_user.png`,
-        href: "https://studio.penguinmod.com/credits.html#",
-    },
-    {
-        text: 'LoyalBlackBishopyBoi',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/LoyalBlackBishopyBoi`,
-        href: "https://scratch.mit.edu/users/LoyalBlackBishopyBoi/",
-    },
-    {
         text: 'onetoanother',
         image: `https://trampoline.turbowarp.org/avatars/by-username/onetoanother`,
-        href: "https://penguinmod.com/profile?user=onetoanother",
+        href: `https://scratch.mit.edu/users/onetoanother/`,
     },
     {
         text: 'NamelessCat',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/NamelessCat`,
-        href: "https://penguinmod.com/profile?user=NamelessCat",
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=cat`,
+        href: "https://penguinmod.com/profile?user=cat",
     },
     {
         text: 'Just-Noone',
         image: `https://trampoline.turbowarp.org/avatars/by-username/Just-Noone`,
-        href: "https://penguinmod.com/profile?user=Just-Noone",
+        href: `https://scratch.mit.edu/users/Just-Noone/`,
     },
     {
         text: 'goose_but_smart',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/goose_but_smart`,
-        href: "https://penguinmod.com/profile?user=goose_but_smart",
+        image: `https://penguinmod.com/unknown_user.png`,
+        href: "https://studio.penguinmod.com/credits.html#",
     },
     {
         text: 'Le_Blob77',
         image: `https://trampoline.turbowarp.org/avatars/by-username/Le_Blob77`,
-        href: "https://penguinmod.com/profile?user=Le_Blob77",
+        href: `https://scratch.mit.edu/users/Le_Blob77/`,
     },
     {
         text: 'MrRedstonia',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/MrRedstonia`,
-        href: "https://penguinmod.com/profile?user=MrRedstonia",
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=mrredstonia`,
+        href: "https://penguinmod.com/profile?user=mrredstonia",
     },
     {
         text: 'TheShovel',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/TheShovel`,
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=TheShovel`,
         href: "https://penguinmod.com/profile?user=TheShovel",
     },
     {
@@ -266,77 +261,74 @@ const pmTranslators = [
     },
     {
         text: 'GigantTech',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/GigantTech`,
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=GigantTech`,
         href: "https://penguinmod.com/profile?user=GigantTech",
     },
     {
         text: 'hacker_anonimo',
         image: `https://trampoline.turbowarp.org/avatars/by-username/hacker_anonimo`,
-        href: "https://penguinmod.com/profile?user=hacker_anonimo",
+        href: `https://scratch.mit.edu/users/hacker_anonimo/`,
     },
     {
         text: 'zaaxd52',
         image: `https://trampoline.turbowarp.org/avatars/by-username/zaaxd52`,
-        href: "https://penguinmod.com/profile?user=zaaxd52",
+        href: `https://scratch.mit.edu/users/zaaxd52/`,
     },
     {
         text: 'G1nX',
         image: `https://trampoline.turbowarp.org/avatars/by-username/G1nX`,
-        href: "https://penguinmod.com/profile?user=G1nX",
+        href: `https://scratch.mit.edu/users/G1nX/`,
     },
     {
         text: 'FNFFortune',
         image: `https://trampoline.turbowarp.org/avatars/by-username/FNFFortune`,
-        href: "https://penguinmod.com/profile?user=FNFFortune",
+        href: `https://scratch.mit.edu/users/FNFFortune/`,
     },
-    // has since left the server
-    // possibly they have a new account, so replace the name & url if so
     {
         text: 'Gabberythethughunte',
         image: `https://penguinmod.com/unknown_user.png`,
-        href: "https://penguinmod.com/profile?user=Gabberythethughunte",
+        href: "https://studio.penguinmod.com/credits.html#",
     },
     {
         text: 'keriyo',
         image: `https://trampoline.turbowarp.org/avatars/by-username/keriyo`,
-        href: "https://penguinmod.com/profile?user=keriyo",
+        href: `https://scratch.mit.edu/users/keriyo/`,
     },
     {
         text: 'DenPlayTS',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/DenPlayTS`,
-        href: "https://penguinmod.com/profile?user=DenPlayTS",
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=denplayts`,
+        href: "https://penguinmod.com/profile?user=denplayts",
     },
     {
         text: 'Tsalbre',
         image: `https://trampoline.turbowarp.org/avatars/by-username/Tsalbre`,
-        href: "https://penguinmod.com/profile?user=Tsalbre",
+        href: `https://scratch.mit.edu/users/Tsalbre/`,
     },
     {
         text: 'MubiLop',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/MubiLop`,
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=MubiLop`,
         href: "https://penguinmod.com/profile?user=MubiLop",
     },
     {
         text: 'TLP136',
         image: `https://trampoline.turbowarp.org/avatars/by-username/TLP136`,
-        href: "https://penguinmod.com/profile?user=TLP136",
+        href: `https://scratch.mit.edu/users/TLP136/`,
     },
     {
         text: 'Cymock',
         image: `https://trampoline.turbowarp.org/avatars/by-username/Cymock`,
-        href: "https://penguinmod.com/profile?user=Cymock",
+        href: `https://scratch.mit.edu/users/Cymock/`,
     },
     {
         text: 'ItzzEndr',
         image: `https://trampoline.turbowarp.org/avatars/by-username/ItzzEndr`,
-        href: "https://penguinmod.com/profile?user=ItzzEndr",
+        href: `https://scratch.mit.edu/users/ItzzEndr/`,
     },
     {
         text: 'Capysussa',
         image: `https://trampoline.turbowarp.org/avatars/by-username/Capysussa`,
-        href: "https://penguinmod.com/profile?user=Capysussa",
+        href: `https://scratch.mit.edu/users/Capysussa/`,
     },
-    // con-zie is now banned from PenguinMod
     {
         text: 'con-zie',
         image: `https://penguinmod.com/unknown_user.png`,
@@ -344,22 +336,22 @@ const pmTranslators = [
     },
     {
         text: 'ImNotScratchY_lolol',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/ImNotScratchY_lolol`,
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=ImNotScratchY_lolol`,
         href: "https://penguinmod.com/profile?user=ImNotScratchY_lolol",
     },
     {
         text: 'justablock',
         image: `https://trampoline.turbowarp.org/avatars/by-username/justablock`,
-        href: "https://penguinmod.com/profile?user=justablock",
+        href: `https://scratch.mit.edu/users/justablock/`,
     },
     {
         text: 'inventionpro',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/inventionpro`,
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=inventionpro`,
         href: "https://penguinmod.com/profile?user=inventionpro",
     },
     {
         text: 'SkyBuilder1717',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/SkyBuilder1717`,
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=SkyBuilder1717`,
         href: "https://penguinmod.com/profile?user=SkyBuilder1717",
     },
     {
@@ -370,11 +362,11 @@ const pmTranslators = [
     {
         text: 'lem0n0fficial',
         image: `https://trampoline.turbowarp.org/avatars/by-username/lem0n0fficial`,
-        href: "https://penguinmod.com/profile?user=lem0n0fficial",
+        href: `https://scratch.mit.edu/users/lem0n0fficial/`,
     },
     {
         text: 'Oldcoinmania',
-        image: `https://trampoline.turbowarp.org/avatars/by-username/Oldcoinmania`,
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=Oldcoinmania`,
         href: "https://penguinmod.com/profile?user=Oldcoinmania",
     },
     {
@@ -385,8 +377,23 @@ const pmTranslators = [
     {
         text: 'Chip',
         image: `https://avatars.githubusercontent.com/u/116580105?s=96&v=4`,
-        href: "https://penguinmod.com/profile?user=chip",
-    }
+        href: "https://github.com/triisdang",
+    },
+    {
+        text: 'enduh',
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=enduh`,
+        href: "https://penguinmod.com/profile?user=enduh",
+    },
+    {
+        text: 'riwataNOUVEAU',
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=riwataNOUVEAU`,
+        href: "https://penguinmod.com/profile?user=riwataNOUVEAU",
+    },
+    {
+        text: 'Prode',
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=Prode`,
+        href: "https://penguinmod.com/profile?user=Prode",
+    },
 ];
 
 const pmCostumeSubmittors = [
@@ -414,7 +421,7 @@ const pmCostumeSubmittors = [
     {
         text: 'G1nX',
         image: `https://trampoline.turbowarp.org/avatars/by-username/G1nX`,
-        href: "https://penguinmod.com/profile?user=G1nX",
+        href: `https://scratch.mit.edu/users/G1nX/`,
     },
     // unknown
     {
@@ -548,7 +555,7 @@ const pmSoundSubmittors = [
     {
         text: 'G1nX',
         image: `https://trampoline.turbowarp.org/avatars/by-username/G1nX`,
-        href: "https://penguinmod.com/profile?user=G1nX",
+        href: `https://scratch.mit.edu/users/G1nX/`,
     },
     // unknown
     {
@@ -640,6 +647,30 @@ const pmExtensionDevelopers = [
     'AshimeeAlt'
 ].map(fromHardcodedGithub);
 
+const pmCodeUsedFrom = [
+    {
+        text: "Gandi-IDE",
+        image: `https://github.com/Gandi-IDE.png`,
+        href: `https://github.com/Gandi-IDE/`,
+    },
+    {
+        text: "TurboWarp",
+        image: `https://github.com/TurboWarp.png`,
+        href: `https://github.com/TurboWarp/`,
+    },
+    {
+        text: "scratchfoundation",
+        image: `https://github.com/scratchfoundation.png`,
+        href: `https://github.com/scratchfoundation/`,
+    },
+    {
+        text: "Nitro-Bolt",
+        image: `https://github.com/Nitro-Bolt.png`,
+        href: `https://github.com/Nitro-Bolt/`,
+    },
+    // TODO: There are 1000% more projects we've used some stuff from but I don't remember
+];
+
 export default {
     addonDevelopers: shuffle(addonDevelopers),
     pmDevelopers: shuffle(pmDevelopers),
@@ -649,5 +680,6 @@ export default {
     pmTranslators: shuffle(pmTranslators),
     pmSoundSubmittors: shuffle(pmSoundSubmittors),
     pmCostumeSubmittors: shuffle(pmCostumeSubmittors),
-    pmPullRequestDevelopers: shuffle(pmPullRequestDevelopers)
+    pmPullRequestDevelopers: shuffle(pmPullRequestDevelopers),
+    pmCodeUsedFrom: shuffle(pmCodeUsedFrom),
 };

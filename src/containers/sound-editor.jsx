@@ -48,11 +48,12 @@ class SoundEditor extends React.Component {
             'setRef',
             'resampleBufferToRate',
             'handleModifyMenu',
+            'handleFormatMenu',
             'getSelectionBuffer'
         ]);
         this.state = {
             copyBuffer: null,
-            chunkLevels: computeChunkedRMS(this.props.samples),
+            chunkLevels: computeChunkedRMS(this.props.samples, this.props.waveformChunkSize),
             playhead: null, // null is not playing, [0 -> 1] is playing percent
             trimStart: null,
             trimEnd: null
@@ -69,6 +70,11 @@ class SoundEditor extends React.Component {
         document.addEventListener('keydown', this.handleKeyPress);
     }
     componentWillReceiveProps(newProps) {
+        if (newProps.waveformChunkSize !== this.props.waveformChunkSize) {
+            this.setState({
+                chunkLevels: computeChunkedRMS(newProps.samples, newProps.waveformChunkSize),
+            });
+        }
         if (newProps.soundId !== this.props.soundId) { // A different sound has been selected
             this.redoStack = [];
             this.undoStack = [];
@@ -140,7 +146,7 @@ class SoundEditor extends React.Component {
         this.audioBufferPlayer.stop();
         this.audioBufferPlayer = new AudioBufferPlayer(samples, sampleRate);
         this.setState({
-            chunkLevels: computeChunkedRMS(samples),
+            chunkLevels: computeChunkedRMS(samples, this.props.waveformChunkSize),
             playhead: null
         });
     }
@@ -240,7 +246,9 @@ class SoundEditor extends React.Component {
         this.handleStopPlaying();
     }
     effectFactory(name) {
-        return () => this.handleEffect(name);
+        return () => this.handleEffect({
+            preset: name,
+        });
     }
     copyCurrentBuffer() {
         // Cannot reliably use props.samples because it gets detached by Firefox
@@ -249,7 +257,7 @@ class SoundEditor extends React.Component {
             sampleRate: this.audioBufferPlayer.buffer.sampleRate
         };
     }
-    handleEffect(name) {
+    handleEffect(options) {
         const trimStart = this.state.trimStart === null ? 0.0 : this.state.trimStart;
         const trimEnd = this.state.trimEnd === null ? 1.0 : this.state.trimEnd;
 
@@ -258,7 +266,7 @@ class SoundEditor extends React.Component {
             return;
         }
 
-        const effects = new AudioEffects(this.audioBufferPlayer.buffer, name, trimStart, trimEnd);
+        const effects = new AudioEffects(this.audioBufferPlayer.buffer, options, trimStart, trimEnd);
         effects.process((renderedBuffer, adjustedTrimStart, adjustedTrimEnd) => {
             const samples = renderedBuffer.getChannelData(0);
             const sampleRate = renderedBuffer.sampleRate;
@@ -448,16 +456,12 @@ class SoundEditor extends React.Component {
             this.handleUpdateTrim(null, null);
         }
     }
+
     handleModifyMenu() {
         // get selected audio
         const bufferSelection = this.getSelectionBuffer();
         // for preview
         const audio = new AudioContext();
-        // const testNode = audio.createBiquadFilter();
-        // testNode.type = "lowpass";
-        // testNode.frequency.value = 880;
-        // testNode.Q.value = 0.7;
-        // testNode.connect(audio.destination);
         const gainNode = audio.createGain();
         gainNode.gain.value = 1;
         gainNode.connect(audio.destination);
@@ -470,7 +474,6 @@ class SoundEditor extends React.Component {
             const truePitch = isNaN(Number(pitch.value)) ? 0 : Number(pitch.value);
             const trueVolume = isNaN(Number(volume.value)) ? 0 : Number(volume.value);
             this.handleEffect({
-                special: true,
                 pitch: truePitch * 10,
                 volume: trueVolume
             });
@@ -584,6 +587,79 @@ class SoundEditor extends React.Component {
         };
         valueVolume.oninput = valueVolume.onchange;
     }
+    handleFormatMenu() {
+        const sampleRates = [
+            3000, 4000, 8000, 11025, 16000, 22050, 32000, 44100,
+            48000, 88200, 96000, 176400, 192000, 352800, 384000,
+        ];
+        let selectedSampleRate = this.props.sampleRate;
+        let selectedForceRate = false;
+        const menu = this.displayPopup("Format Sound", 580, 300, "Apply", "Cancel", () => {
+            // accepted
+            const edits = {
+                sampleRate: selectedSampleRate,
+            };
+            if (selectedForceRate) {
+                edits.sampleRateEnforced = selectedSampleRate;
+            }
+            this.handleEffect(edits);
+        });
+
+        menu.textarea.style = "padding:8px;";
+
+        const labelSampleRate = document.createElement("p");
+        labelSampleRate.innerHTML = "Sample Rate";
+        labelSampleRate.style = "font-size:14px;";
+        menu.textarea.append(labelSampleRate);
+        const inputSampleRate = document.createElement("select");
+        inputSampleRate.style = "width:50%;"
+        menu.textarea.append(inputSampleRate);
+        for (const rate of sampleRates) {
+            const option = document.createElement("option");
+            option.value = rate;
+            option.innerHTML = `${rate}`;
+            inputSampleRate.append(option);
+        }
+        inputSampleRate.selectedIndex = sampleRates.indexOf(this.props.sampleRate);
+        const labelSampleRateWarning = document.createElement("p");
+        labelSampleRateWarning.innerHTML = "Choosing a higher sample rate than the current rate will not make the existing audio higher quality.";
+        labelSampleRateWarning.style = "font-size:13px;opacity:0.5;";
+        menu.textarea.append(labelSampleRateWarning);
+        inputSampleRate.onchange = () => {
+            selectedSampleRate = inputSampleRate.value;
+        };
+
+        const labelResampleAudio = document.createElement("label");
+        labelResampleAudio.innerHTML = "Enforce New Sample Rate";
+        menu.textarea.append(labelResampleAudio);
+        const inputResampleAudio = document.createElement("input");
+        inputResampleAudio.type = "checkbox";
+        inputResampleAudio.style = "margin-right:8px;";
+        labelResampleAudio.prepend(inputResampleAudio);
+        const labelResampleAudioWarning = document.createElement("p");
+        labelResampleAudioWarning.innerHTML = "This changes the properties of the entire sound, "
+            + "making lower sample rates use less file size. "
+            + "However, audio added to this sound will only be able to use the new sample rate.";
+        labelResampleAudioWarning.style = "font-size:13px;opacity:0.5;";
+        menu.textarea.append(labelResampleAudioWarning);
+
+        const warning = document.createElement("p");
+        warning.innerHTML = "Applying these changes will cause the entire sound to change, not just the selected area.";
+        warning.style = "font-size:14px;";
+        warning.style.display = "none";
+        menu.textarea.append(warning);
+
+        inputResampleAudio.onchange = () => {
+            selectedForceRate = inputResampleAudio.checked;
+            if (selectedForceRate) {
+                warning.style.display = "";
+            } else {
+                warning.style.display = "none";
+            }
+        };
+    }
+
+    // TODO: use actual scratch-gui menus instead of this
     displayPopup(title, width, height, okname, denyname, accepted, cancelled) {
         const div = document.createElement("div");
         document.body.append(div);
@@ -660,6 +736,7 @@ class SoundEditor extends React.Component {
                 onFaster={this.effectFactory(effectTypes.FASTER)}
                 onLouder={this.effectFactory(effectTypes.LOUDER)}
                 onModifySound={this.handleModifyMenu}
+                onFormatSound={this.handleFormatMenu}
                 onMute={this.effectFactory(effectTypes.MUTE)}
                 onPaste={this.handlePaste}
                 onPlay={this.handlePlay}
@@ -689,26 +766,28 @@ SoundEditor.propTypes = {
     samples: PropTypes.instanceOf(Float32Array),
     soundId: PropTypes.string,
     soundIndex: PropTypes.number,
-    vm: PropTypes.instanceOf(VM).isRequired
+    vm: PropTypes.instanceOf(VM).isRequired,
+    waveformChunkSize: PropTypes.number,
 };
 
 const mapStateToProps = (state, { soundIndex }) => {
     const sprite = state.scratchGui.vm.editingTarget.sprite;
     // Make sure the sound index doesn't go out of range.
-    const index = soundIndex < sprite.sounds.length ? soundIndex : sprite.sounds.length - 1;
-    const sound = state.scratchGui.vm.editingTarget.sprite.sounds[index];
+    const index = Math.min(sprite.sounds.length - 1, Math.max(0, soundIndex));
+    const sound = sprite.sounds[index] ?? {};
     const audioBuffer = state.scratchGui.vm.getSoundBuffer(index);
     return {
-        isStereo: audioBuffer.numberOfChannels !== 1,
+        isStereo: audioBuffer?.numberOfChannels !== 1,
         duration: sound.sampleCount / sound.rate,
         size: sound.asset ? sound.asset.data.byteLength : 0,
         soundId: sound.soundId,
         dataFormat: sound.dataFormat,
-        sampleRate: audioBuffer.sampleRate,
-        samples: audioBuffer.getChannelData(0),
+        sampleRate: audioBuffer?.sampleRate ?? 3000,
+        samples: audioBuffer ? audioBuffer.getChannelData(0) : new Float32Array(1),
         isFullScreen: state.scratchGui.mode.isFullScreen,
         name: sound.name,
-        vm: state.scratchGui.vm
+        vm: state.scratchGui.vm,
+        waveformChunkSize: state.scratchGui.addonUtil.soundEditorWaveformChunkSize,
     };
 };
 

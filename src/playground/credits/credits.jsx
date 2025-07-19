@@ -84,6 +84,15 @@ const Credits = () => (
             <p>There are even community members who have helped develop PenguinMod. People like <i>you!</i></p>
             <UserList users={UserData.pmPullRequestDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
+            <p>
+                We've also included work from other open-source projects inside of PenguinMod.
+                Here's a list of some other projects you should check out:
+            </p>
+            <UserList users={UserData.pmCodeUsedFrom} />
+            <p><i>The list order is randomized on each refresh.</i></p>
+            <ul>
+                <li>Code for "Center" option in Costume editor is from <a href="https://github.com/Nitro-Bolt/scratch-paint/blob/develop/src/containers/mode-tools.jsx#L203-L216">Cubester@Nitro-Bolt</a></li>
+            </ul>
         </section>
         <section>
             <h2>GitHub Pages</h2>
@@ -147,22 +156,13 @@ const Credits = () => (
             <p><i>The list order is randomized on each refresh.</i></p>
             <h2>Accounts</h2>
             <p>
-                Login is managed
-                by <a href="https://auth.itinerary.eu.org/">Scratch Auth</a> created
-                by <a href="https://scratch.mit.edu/users/Looky1173/">Looky1173</a>.
-                (thanks for adding us to the user list!)
+                Scratch login on PenguinMod is managed with <a href="https://oauth2.scratch-wiki.info/">ScratchOAuth2</a>,
+                see their <a href="https://github.com/ScratchVerifier/ScratchOAuth2">GitHub repository</a>.
                 <br />
                 <br />
                 <i>
-                    "Scratch Auth" is not actually affiliated with Scratch,
+                    "ScratchOAuth2" is not actually affiliated with Scratch,
                     the Scratch Team, or the Scratch Foundation.
-                </i>
-                <br />
-                <br />
-                <i>
-                    PenguinMod is also not owned or managed by Looky1173, please only comment on his profile
-                    <br />
-                    if the Scratch Auth page tells you that it failed, not if PenguinMod fails to load.
                 </i>
             </p>
         </section>
@@ -178,8 +178,7 @@ const Credits = () => (
             <p>
                 We use some MIT licensed extensions from TurboWarp as they are really useful!
                 Check out the full list of TurboWarp extensions <a href="https://extensions.turbowarp.org/">here</a>,
-                but we still need to credit these people!
-                Check them out below:
+                and see individual contributors below:
             </p>
             <UserList users={UserData.extensionDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
@@ -189,16 +188,26 @@ const Credits = () => (
             </p>
             <UserList users={UserData.pmExtensionDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
+            <p>
+                The Scratch Auth extension has a login system managed with <a href="https://auth.itinerary.eu.org/">Scratch Auth</a>,
+                created by <a href="https://scratch.mit.edu/users/Looky1173/">Looky1173</a>.
+                (thanks for adding us to the user list!)
+                <br />
+                <br />
+                <i>
+                    "Scratch Auth" is not actually affiliated with Scratch,
+                    the Scratch Team, or the Scratch Foundation.
+                </i>
+            </p>
         </section>
         <section>
             <h2>Addons</h2>
             <p>
-                Addons are mostly taken from <a href="https://scratchaddons.com/">Scratch Addons</a>,
-                but we hope to have some PenguinMod addons in the future.
-                Here are the developers that made the current addons available.
+                Here are the developers that made the addons from <a href="https://scratchaddons.com/">Scratch Addons</a> available.
             </p>
             <UserList users={UserData.addonDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
+            <p>PenguinMod-exclusive addons are created by the contributors listed in the Contributors section.</p>
         </section>
         <section>
             <h1>TurboWarp</h1>
@@ -254,7 +263,7 @@ const Credits = () => (
                 PenguinMod is also (very very slowly) getting translated into other languages, in the future
                 hopefully the same number of languages can be supported. It'll take a while until we get there though.
             </p>
-            <p>Contributors:</p>
+            <p>Here is the current list of PenguinMod Translators:</p>
             <UserList users={UserData.pmTranslators} />
             <p><i>The list order is randomized on each refresh.</i></p>
         </section>

@@ -162,6 +162,7 @@ const GUIComponent = props => {
         onShare,
         onShowPrivacyPolicy,
         onStartSelectingFileUpload,
+        onStartFolderUpload,
         onTelemetryModalCancel,
         onTelemetryModalOptIn,
         onTelemetryModalOptOut,
@@ -478,6 +479,7 @@ const GUIComponent = props => {
                         canShare={canShare}
                         className={styles.menuBarPosition}
                         enableCommunity={enableCommunity}
+                        isDirectoryPickerSupported={!!window.showDirectoryPicker}
                         isShared={isShared}
                         logo={logo}
                         renderLogin={renderLogin}
@@ -496,6 +498,7 @@ const GUIComponent = props => {
                         onSeeCommunity={onSeeCommunity}
                         onShare={onShare}
                         onStartSelectingFileUpload={onStartSelectingFileUpload}
+                        onStartFolderUpload={onStartFolderUpload}
                         onToggleLoginOpen={onToggleLoginOpen}
                     />
                 ) : null}
@@ -729,6 +732,7 @@ GUIComponent.propTypes = {
     onShare: PropTypes.func,
     onShowPrivacyPolicy: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
+    onStartFolderUpload: PropTypes.func,
     onTabSelect: PropTypes.func,
     onTelemetryModalCancel: PropTypes.func,
     onTelemetryModalOptIn: PropTypes.func,

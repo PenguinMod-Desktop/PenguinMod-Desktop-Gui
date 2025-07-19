@@ -87,11 +87,21 @@ class Blocks extends React.Component {
         this.ScratchBlocks = VMScratchBlocks(props.vm);
         this.ScratchBlocks.Toolbox.registerMenu('extensionControls', [
             {
+                text: 'Remove Extension',
+                enabled: true,
+                callback: ext => props.vm.extensionManager.removeExtension(ext)
+            },
+            {
+                text: 'Remove Unused Extensions',
+                enabled: true,
+                callback: () => props.vm.extensionManager.removeUnusedExtensions()
+            },
+            {
                 text: 'Replace Extension',
                 enabled: true,
                 callback: ext => this.props.onOpenCustomExtensionModal(ext)
             }
-        ], true);
+        ]);
         window.ScratchBlocks = this.ScratchBlocks;
         AddonHooks.blockly = this.ScratchBlocks;
         AddonHooks.blocklyCallbacks.forEach(i => i());
@@ -201,8 +211,8 @@ class Blocks extends React.Component {
         // entire toolbox every time we reset the workspace.  We call updateToolbox as a part of
         // componentDidUpdate so the toolbox will still correctly be updated
         this.setToolboxRefreshEnabled = this.workspace.setToolboxRefreshEnabled.bind(this.workspace);
-        this.workspace.setToolboxRefreshEnabled = () => {
-            this.setToolboxRefreshEnabled(false);
+        this.workspace.setToolboxRefreshEnabled = value => {
+            this.setToolboxRefreshEnabled(value);
         };
 
         // @todo change this when blockly supports UI events
@@ -512,8 +522,6 @@ class Blocks extends React.Component {
     }
     handleMonitorsUpdate (monitors) {
         // Update the checkboxes of the relevant monitors.
-        // TODO: What about monitors that have fields? See todo in scratch-vm blocks.js changeBlock:
-        // https://github.com/LLK/scratch-vm/blob/2373f9483edaf705f11d62662f7bb2a57fbb5e28/src/engine/blocks.js#L569-L576
         const flyout = this.workspace.getFlyout();
         for (const monitor of monitors.values()) {
             const blockId = monitor.get('id');

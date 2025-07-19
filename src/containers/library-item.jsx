@@ -185,6 +185,7 @@ class LibraryItem extends React.PureComponent {
                 credits={this.props.credits}
                 extDeveloper={this.props.extDeveloper}
                 eventSubmittor={this.props.eventSubmittor}
+                extraLabels={this.props.extraLabels}
                 description={this.props.description}
                 disabled={this.props.disabled}
                 isNew={this.props.isNew}
@@ -200,6 +201,7 @@ class LibraryItem extends React.PureComponent {
                 id={this.props.id}
                 _id={this.props._id}
                 incompatibleWithScratch={this.props.incompatibleWithScratch}
+                extensionWarningOnImport={this.props.extensionWarningOnImport}
                 insetIconURL={this.props.insetIconURL}
                 customInsetColor={this.props.customInsetColor}
                 internetConnectionRequired={this.props.internetConnectionRequired}
@@ -231,11 +233,38 @@ class LibraryItem extends React.PureComponent {
 LibraryItem.propTypes = {
     intl: intlShape,
     bluetoothRequired: PropTypes.bool,
-    collaborator: PropTypes.string,
-    twDeveloper: PropTypes.string,
-    extDeveloper: PropTypes.string,
-    credits: PropTypes.string,
-    eventSubmittor: PropTypes.string,
+    collaborator: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ]),
+    twDeveloper: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ]),
+    extDeveloper: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ]),
+    credits: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ]),
+    eventSubmittor: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ]),
+    extraLabels: PropTypes.arrayOf(
+        PropTypes.shape({
+            name: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.node
+            ]),
+            value: PropTypes.oneOfType([
+                PropTypes.string,
+                PropTypes.node
+            ]),
+        })
+    ),
     description: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.node
@@ -260,6 +289,7 @@ LibraryItem.propTypes = {
     ),
     id: PropTypes.number.isRequired,
     incompatibleWithScratch: PropTypes.bool,
+    extensionWarningOnImport: PropTypes.bool,
     insetIconURL: PropTypes.string,
     internetConnectionRequired: PropTypes.bool,
     isPlaying: PropTypes.bool,
@@ -275,8 +305,8 @@ LibraryItem.propTypes = {
     favorited: PropTypes.bool,
     deletable: PropTypes.bool,
     custom: PropTypes.bool,
-    _unsandboxed: PropTypes.bool,
     onFavoriteUpdated: PropTypes.func,
+    _unsandboxed: PropTypes.bool,
     _id: PropTypes.string,
 };
 

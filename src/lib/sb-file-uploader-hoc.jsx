@@ -6,7 +6,9 @@ import {connect} from 'react-redux';
 import log from '../lib/log';
 import sharedMessages from './shared-messages';
 import FileSystemAPI from './tw-filesystem-api';
+import {isMobile} from './pm-mobile';
 import {setFileHandle} from '../reducers/tw';
+import JSZip from 'jszip';
 
 import {
     LoadingStates,
@@ -51,9 +53,11 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                 'getProjectTitleFromFilename',
                 'handleFinishedLoadingUpload',
                 'handleStartSelectingFileUpload',
+                'handleStartFolderUpload',
                 'handleChange',
                 'onload',
-                'removeFileObjects'
+                'removeFileObjects',
+                'readFolderHandleRecursively'
             ]);
             // tw: We have multiple instances of this HOC alive at a time. This flag fixes issues that arise from that.
             this.expectingFileUploadFinish = false;
@@ -104,7 +108,12 @@ const SBFileUploaderHOC = function (WrappedComponent) {
             } else {
                 // create <input> element and add it to DOM
                 this.inputElement = document.createElement('input');
-                this.inputElement.accept = '.sb,.sb2,.sb3,.pm,.pmp';
+                
+                // pm: Some bad mobile devices block any file type (iOS)
+                if (!isMobile()) {
+                    this.inputElement.accept = '.sb,.sb2,.sb3,.pm,.pmp';
+                }
+
                 this.inputElement.style = 'display: none;';
                 this.inputElement.type = 'file';
                 this.inputElement.onchange = this.handleChange; // connects to step 3
@@ -113,6 +122,87 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                 this.inputElement.click();
             }
         }
+
+        // pm: essentially step 1 + 2 + 3 but we pick and choose what we want to keep. folder requires FS api
+        async handleStartFolderUpload() {
+            if (!FileSystemAPI.available()) return;
+
+            const {
+                intl,
+                isShowingWithoutId,
+                loadingState,
+                projectChanged,
+                userOwnsProject
+            } = this.props;
+            this.expectingFileUploadFinish = true;
+
+            // redo step 7, in case it got skipped last time and its objects are
+            // still in memory
+            this.removeFileObjects();
+            // create fileReader
+            this.fileReader = new FileReader();
+            this.fileReader.onload = this.onload;
+
+            try {
+                const handle = await FileSystemAPI.showDirectoryPicker("pm-project-folder", "documents");
+                let uploadAllowed = true;
+                if (userOwnsProject || (projectChanged && isShowingWithoutId)) {
+                    uploadAllowed = confirm( // eslint-disable-line no-alert
+                        intl.formatMessage(sharedMessages.replaceProjectWarning)
+                    );
+                }
+                if (!uploadAllowed) return this.removeFileObjects();
+
+                // we dont have a file handle to set
+                this.props.onSetFileHandle(null);
+                // cues step 4
+                this.props.requestProjectUpload(loadingState);
+
+                // convert the file handle to a zip file and load it
+                // GUI & VM seems to "speak in" zip files so this is the best way I can think of handling it
+                const filename = handle.name;
+                const zip = new JSZip();
+                await this.readFolderHandleRecursively(handle, zip);
+                const zipArrayBuffer = await zip.generateAsync({ type: "arraybuffer" });
+
+                this.props.onLoadingStarted();
+
+                let loadingSuccess = false;
+                // tw: stop when loading new project
+                this.props.vm.stop();
+                this.props.vm.loadProject(zipArrayBuffer)
+                    .then(() => {
+                        if (filename) {
+                            const uploadedProjectTitle = filename.substring(0, 100);
+                            this.props.onSetProjectTitle(uploadedProjectTitle);
+                        }
+                        this.props.vm.renderer.draw();
+                        loadingSuccess = true;
+                    })
+                    .catch(error => {
+                        log.warn(error);
+                        // eslint-disable-next-line no-alert
+                        alert(this.props.intl.formatMessage(messages.loadError, {
+                            error: `${error}`
+                        }));
+                    })
+                    .then(() => {
+                        this.props.onLoadingFinished(this.props.loadingState, loadingSuccess);
+                        // go back to step 7: whether project loading succeeded
+                        // or failed, reset file objects
+                        this.removeFileObjects();
+                    });
+            } catch (err) {
+                // If the user aborted it, that's not an error.
+                if (err && err.name === 'AbortError') {
+                    this.removeFileObjects();
+                    return;
+                }
+                // eslint-disable-next-line no-console
+                console.error(err);
+            }
+        }
+
         // step 3: user has picked a file using the file chooser dialog.
         // We don't actually load the file here, we only decide whether to do so.
         handleChange (e) {
@@ -226,6 +316,25 @@ const SBFileUploaderHOC = function (WrappedComponent) {
             this.fileReader = null;
             this.fileToUpload = null;
         }
+
+        async readFolderHandleRecursively (folderHandle, zip, path = "") {
+            for await (const handle of folderHandle.values()) {
+                const handlePath = `${path}${handle.name}`;
+
+                if (handle.kind === "file") {
+                    const file = await handle.getFile();
+                    const fileData = await file.arrayBuffer();
+                    zip.file(handlePath, fileData);
+                } else if (handle.kind === "directory") {
+                    // NOTE: Right now there's no reason to preserve directories, but the future save file format will use them.
+                    // See here for more info: https://docs.penguinmod.com/save-format/
+                    // we read the folder handle again
+                    zip.folder(handlePath)
+                    await this.readFolderHandleRecursively(handle, zip, `${handlePath}/`);
+                }
+            }
+        }
+
         render () {
             const {
                 /* eslint-disable no-unused-vars */
@@ -248,6 +357,7 @@ const SBFileUploaderHOC = function (WrappedComponent) {
                 <React.Fragment>
                     <WrappedComponent
                         onStartSelectingFileUpload={this.handleStartSelectingFileUpload}
+                        onStartFolderUpload={this.handleStartFolderUpload}
                         {...componentProps}
                     />
                 </React.Fragment>

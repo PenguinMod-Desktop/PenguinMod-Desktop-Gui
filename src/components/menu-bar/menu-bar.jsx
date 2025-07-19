@@ -85,6 +85,8 @@ import sharedMessages from '../../lib/shared-messages';
 import SeeInsideButton from './tw-see-inside.jsx';
 import { notScratchDesktop } from '../../lib/isScratchDesktop.js';
 
+//import { consoleLogs } from '../../lib/pm-log-capture.js';
+
 const ariaMessages = defineMessages({
     language: {
         id: 'gui.menuBar.LanguageSelector',
@@ -420,6 +422,21 @@ class MenuBar extends React.Component {
             this.props.onRequestCloseAbout();
         };
     }
+    /*
+      - hidden until this is actually helpful for developers
+      - unhide when a solution is found for not blocking error tracking/using 3rd parties
+    handleClickDownloadLogs() {
+        const str = JSON.stringify(consoleLogs);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        document.body.append(a);
+        const url = window.URL.createObjectURL(new Blob([str]));
+        a.href = url;
+        a.download = 'pm-log-trace.json';
+        a.click();
+        window.URL.revokeObjectURL(url);
+        a.remove();
+    }*/
     render() {
         const saveNowMessage = (
             <FormattedMessage
@@ -686,6 +703,24 @@ class MenuBar extends React.Component {
                                             </React.Fragment>
                                         )}</SB3Downloader>
                                     </MenuSection>
+                                    {this.props.isDirectoryPickerSupported && (
+                                        <MenuSection>
+                                            <MenuItem
+                                                onClick={this.props.onStartFolderUpload}
+                                            >
+                                                {"Load from a folder"}
+                                            </MenuItem>
+                                            <SB3Downloader>{(_className, downloadProject, extended) => (
+                                                <React.Fragment>
+                                                    <MenuItem
+                                                        onClick={this.getSaveToComputerHandler(extended.saveAsFolder)}
+                                                    >
+                                                        {"Export project to folder"}
+                                                    </MenuItem>
+                                                </React.Fragment>
+                                            )}</SB3Downloader>
+                                        </MenuSection>
+                                    )}
                                     {this.props.onClickPackager && (
                                         <MenuSection>
                                             <MenuItem
@@ -978,6 +1013,7 @@ MenuBar.propTypes = {
     fileMenuOpen: PropTypes.bool,
     handleSaveProject: PropTypes.func,
     intl: intlShape,
+    isDirectoryPickerSupported: PropTypes.bool,
     isPlayerOnly: PropTypes.bool,
     isRtl: PropTypes.bool,
     isShared: PropTypes.bool,
@@ -1028,6 +1064,7 @@ MenuBar.propTypes = {
     onSeeCommunity: PropTypes.func,
     onShare: PropTypes.func,
     onStartSelectingFileUpload: PropTypes.func,
+    onStartFolderUpload: PropTypes.func,
     onToggleLoginOpen: PropTypes.func,
     projectId: PropTypes.string,
     projectTitle: PropTypes.string,

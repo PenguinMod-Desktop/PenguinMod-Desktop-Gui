@@ -35,7 +35,7 @@ let vm;
 
 const onVmInit = _vm => {
     vm = _vm;
-    if (vm.runtime.renderer.setPrivateSkinAccess)
+    if (vm.runtime.renderer?.setPrivateSkinAccess)
         vm.runtime.renderer.setPrivateSkinAccess(false);
 };
 
