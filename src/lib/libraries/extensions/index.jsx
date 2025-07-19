@@ -1478,7 +1478,7 @@ if (IsLocal || IsLiveTests) {
             description: 'In development. Do extra things in packaged applications that you can\'t do in the website!',
             featured: true
         },
-
+        
         {
             name: 'Inline Blocks',
             extensionId: 'pmInlineBlocks',
