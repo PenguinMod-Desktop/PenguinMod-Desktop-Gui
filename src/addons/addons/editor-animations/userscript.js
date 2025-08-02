@@ -232,7 +232,7 @@ export default async function({ addon }) {
         { duration: animTime * animationSpeed, easing: getEasing() }
       );
       animation.onfinish = () => {
-        element.style.overflow = "hidden";
+        element.style.overflow = "";
       };
       return;
     }

@@ -863,7 +863,7 @@ const menuItems = [
     },
     {
         name: 'JavaScript',
-        extensionId: 'jgJavascript',
+        extensionId: 'SPjavascriptV2',
         iconURL: jgJavascriptExtensionIcon,
         tags: ['penguinmod', 'programminglanguage'],
         description: 'Run your own custom code written in JavaScript!',
