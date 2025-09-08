@@ -35,6 +35,7 @@ class UsernameModal extends React.Component {
             'handleStoreProjectOptions',
             'handleEnableDangerousOptimizationsChange',
             'handleDisableOffscreenRenderingChange',
+            'handleDisableDirectionClamping',
             'handleLiveTestsChange'
         ]);
     }
@@ -79,6 +80,11 @@ class UsernameModal extends React.Component {
     handleDisableOffscreenRenderingChange (e) {
         this.props.vm.setRuntimeOptions({
             disableOffscreenRendering: e.target.checked
+        });
+    }
+    handleDisableDirectionClamping (e) {
+        this.props.vm.setRuntimeOptions({
+            disableDirectionClamping: e.target.checked
         });
     }
     handleWarpTimerChange (e) {
@@ -140,6 +146,7 @@ class UsernameModal extends React.Component {
                 onRemoveLimitsChange={this.handleRemoveLimitsChange}
                 onEnableDangerousOptimizationsChange={this.handleEnableDangerousOptimizationsChange}
                 onDisableOffscreenRenderingChange={this.handleDisableOffscreenRenderingChange}
+                onDisableDirectionClamping={this.handleDisableDirectionClamping}
                 onWarpTimerChange={this.handleWarpTimerChange}
                 onStageWidthChange={this.handleStageWidthChange}
                 onStageHeightChange={this.handleStageHeightChange}
@@ -200,6 +207,7 @@ const mapStateToProps = state => ({
     removeFencing: !state.scratchGui.tw.runtimeOptions.fencing,
     removeLimits: !state.scratchGui.tw.runtimeOptions.miscLimits,
     disableOffscreenRendering: state.scratchGui.tw.runtimeOptions.disableOffscreenRendering,
+    disableDirectionClamping: state.scratchGui.tw.runtimeOptions.disableDirectionClamping,
     dangerousOptimizations: state.scratchGui.tw.runtimeOptions.dangerousOptimizations,
     warpTimer: state.scratchGui.tw.compilerOptions.warpTimer,
     customStageSize: state.scratchGui.customStageSize,

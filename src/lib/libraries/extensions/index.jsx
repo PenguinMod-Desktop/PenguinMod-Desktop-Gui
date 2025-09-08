@@ -81,6 +81,7 @@ import jwTargetsExtensionThumb from './penguinmod/extensions/jwTargets.svg';
 import jwNumExtensionThumb from './penguinmod/extensions/jwNum.svg';
 import jwColorExtensionThumb from './penguinmod/extensions/jwColor.svg';
 import jwVectorExtensionThumb from './penguinmod/extensions/jwVector.svg';
+import jwLambdaExtensionThumb from './penguinmod/extensions/jwLambda.svg';
 
 import iygPerlinNoiseExtensionIcon from './penguinmod/extensions/perlinnoisebanner.png';
 
@@ -150,6 +151,9 @@ import sharkpoolBCIcon from './penguinmod/extensions/BetterComments.svg';
 import sharkpoolPEIcon from './penguinmod/extensions/particleEngine.svg';
 import jgScriptsExtensionIcon from './penguinmod/extensions/scripts.svg';
 import sharkpoolLooksExpandedIcon from './penguinmod/extensions/looksExpanded.svg';
+import spTurboSkinsIcon from './penguinmod/extensions/turboSkins.svg';
+import spFontManagerIcon from './penguinmod/extensions/fontManager.svg';
+import spSoundWaveIcon from './penguinmod/extensions/soundWaves.svg';
 
 // events
 import jgStorageExtensionIcon from './penguinmod/extensions/storage.png';
@@ -383,7 +387,7 @@ const menuItems = [
     {
         name: 'Sound Waves',
         extensionId: 'https://extensions.penguinmod.com/extensions/SharkPool/Sound-Waves.js',
-        iconURL: 'https://extensions.penguinmod.com/images/SharkPool/Sound-Waves.svg',
+        iconURL: spSoundWaveIcon,
         tags: ['penguinmod', 'noisemaker'],
         description: 'Make sounds with oscillators!',
         extDeveloper: 'SharkPool',
@@ -553,14 +557,19 @@ const menuItems = [
         twDeveloper: 'LilyMakesThings'
     },
     {
-        name: 'Skins',
-        extensionId: 'https://extensions.turbowarp.org/Lily/Skins.js',
-        tags: ['turbowarp', 'graphics'],
-        iconURL: 'https://extensions.turbowarp.org/images/Lily/Skins.svg',
-        insetIconURL: turbowarpIcon,
-        description: 'Have your sprites show themselves as other images or costumes.',
+        name: 'Turbo Skins',
+        extensionId: 'https://sharkpools-extensions.vercel.app/extension-code/Turbo-Skins.js',
+        tags: ['penguinmod', 'graphics'],
+        iconURL: spTurboSkinsIcon,
+        description: 'Display sprites with various images or costumes and control their hitboxes',
+        extraLabels: [
+            {
+                name: "Inspired by",
+                value: "\"Skins\" by LilyMakesThings"
+            }
+        ],
         featured: true,
-        twDeveloper: 'LilyMakesThings'
+        credits: 'SharkPool'
     },
     {
         name: 'Multiple Timers',
@@ -576,8 +585,7 @@ const menuItems = [
         extensionId: 'tempVars',
         iconURL: gsaTempVariablesExtensionIcon,
         tags: ['penguinmod'],
-        description: 'Create variables for use in one block stack. Useful to not clutter the variable list with variables you only use once.',
-        credits: 'LilyMakesThings',
+        description: 'Create temporary variables for use in one block stack.',
         featured: true
     },
     {
@@ -602,7 +610,7 @@ const menuItems = [
     {
         name: 'Font Manager',
         extensionId: 'https://extensions.penguinmod.com/extensions/SharkPool/Font-Manager.js',
-        iconURL: 'https://extensions.penguinmod.com/images/SharkPool/Font-Manager.svg',
+        iconURL: spFontManagerIcon,
         tags: ['penguinmod', 'graphics'],
         description: 'Manage, create, and delete fonts.',
         credits: 'SharkPool, Ashimee',
@@ -665,7 +673,7 @@ const menuItems = [
         extDeveloper: 'pinksheep2917',
         featured: true
     },
-    /*{                                   i dont like this extension anymore it kinda sucks
+    /*DEPRECATED {
         name: 'Extra Mathematics',
         extensionId: 'https://extensions.penguinmod.com/extensions/jwklong/mathematics.js',
         iconURL: 'https://extensions.penguinmod.com/images/jwklong/mathematics.png',
@@ -700,7 +708,7 @@ const menuItems = [
         description: 'Blocks for specific use-cases or major convenience.',
         featured: true
     },
-    {
+    /*DEPRECATED{
         name: 'Odd Messages',
         extensionId: 'oddMessage',
         tags: ['penguinmod'],
@@ -708,7 +716,7 @@ const menuItems = [
         description: 'For logging and variable utilization.',
         featured: true,
         extDeveloper: 'silvxrcat'
-    },
+    },*/
     {
         name: 'HTML iframe Elements',
         extensionId: 'jgIframe',
@@ -912,6 +920,15 @@ const menuItems = [
         iconURL: jwVectorExtensionThumb,
         tags: ['penguinmod', 'math'],
         description: 'Vector type for calculating with X and Y coordinates.',
+        extDeveloper: 'jwklong',
+        featured: true
+    },
+    {
+        name: 'Lambda',
+        extensionId: 'jwLambda',
+        iconURL: jwLambdaExtensionThumb,
+        tags: ['penguinmod'],
+        description: 'Create anonymous functions with arguments and execute them.',
         extDeveloper: 'jwklong',
         featured: true
     },
