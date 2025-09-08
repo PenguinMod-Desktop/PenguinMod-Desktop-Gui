@@ -116,12 +116,12 @@ export default async function ({ addon, msg, console }) {
         const newId = block.id = uid();
         // replace all instances of the old id with the new one
         blocks.forEach(block => {
-          if (block.next === oldId) block.next = newId;
-          if (block.parent === oldId) block.parent = newId;
+          if (block.next === oldId && block.next) block.next = newId;
+          if (block.parent === oldId && block.parent) block.parent = newId;
           for (const name in block.inputs) {
             const input = block.inputs[name];
-            if (input.block === oldId) input.block = newId;
-            if (input.shadow === oldId) input.shadow = newId;
+            if (input.block === oldId && input.block) input.block = newId;
+            if (input.shadow === oldId && input.shadow) input.shadow = newId;
           }
         });
         tabTarget.blocks.createBlock(block);
@@ -502,25 +502,26 @@ export default async function ({ addon, msg, console }) {
           delete tabTarget.blocks._blocks[blockId];
           tabTarget.blocks._blocks[newId] = block;
           const next = tabTarget.blocks.getBlock(block.next);
-          if (next) next.parent = newId;
+          if (next && next.parent && next.parent === oldId) next.parent = newId;
           const parent = tabTarget.blocks.getBlock(block.parent);
           if (parent) {
-            if (parent.next === oldId) parent.next = newId;
+            if (parent.next === oldId && parent.next && parent.next === oldId) parent.next = newId;
             else {
               for (const name in parent.inputs) {
                 const input = parent.inputs[name];
-                if (input.block === oldId) input.block = newId;
-                if (input.shadow === oldId) input.shadow = newId;
+                if (input.block === oldId && input.block && input.block === oldId) input.block = newId;
+                if (input.shadow === oldId && input.shadow && input.shadow === oldId) input.shadow = newId;
               }
             }
           }
           for (const name in block.inputs) {
             const input = block.inputs[name];
             const oblock = tabTarget.blocks.getBlock(input.block);
-            if (oblock) oblock.parent = newId;
+            if (oblock && oblock.parent && oblock.parent === oldId) oblock.parent = newId;
             const shadow = tabTarget.blocks.getBlock(input.shadow);
-            if (shadow) shadow.parent = newId;
+            if (shadow && shadow.parent && shadow.parent === oldId) shadow.parent = newId;
           }
+          if (block.topLevel) block.parent = null;
         }
         for (const tabIdx in savedTabs) {
           const tab = savedTabs[tabIdx];

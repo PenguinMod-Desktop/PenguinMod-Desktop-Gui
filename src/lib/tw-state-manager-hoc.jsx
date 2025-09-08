@@ -406,6 +406,12 @@ const TWStateManager = function (WrappedComponent) {
                 });
             }
 
+            if (urlParams.has('nodirectionclamping')) {
+                this.props.vm.setRuntimeOptions({
+                    disableDirectionClamping: true
+                });
+            }
+ 
             for (const extension of urlParams.getAll('extension')) {
                 this.props.vm.extensionManager.loadExtensionURL(extension);
             }
@@ -534,6 +540,12 @@ const TWStateManager = function (WrappedComponent) {
                     searchParams.set('nooffscreen', '');
                 } else {
                     searchParams.delete('nooffscreen');
+                }
+
+                if (runtimeOptions.disableDirectionClamping) {
+                    searchParams.set('nodirectionclamping', '');
+                } else {
+                    searchParams.delete('nodirectionclamping');
                 }
 
                 setSearchParams(searchParams);
