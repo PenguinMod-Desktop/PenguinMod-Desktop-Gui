@@ -1,5 +1,6 @@
 /* eslint-disable */ // FUCK OFF FOR THE LOVE OF CHRIST
 export default async function ({ addon, msg, console }) {
+  return // !! The addon deletes blocks randomly and so can not inject itself !!
   // make migrating code between tabs possible at all
   let selectedTab = -1;
   let hoveredTab = -1;

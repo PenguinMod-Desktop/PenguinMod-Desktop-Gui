@@ -77,6 +77,8 @@ import _editor_animations from "../addons/editor-animations/_manifest_entry.js";
 import _reorder_custom_inputs from "../addons/reorder-custom-inputs/_manifest_entry.js";
 import _sounds_newgrounds_button from "../addons/sounds-newgrounds-button/_manifest_entry.js";
 import _paint_reshape_tweaks from "../addons/paint-reshape-tweaks/_manifest_entry.js";
+import _editor_tweaks from "../addons/editor-tweaks/_manifest_entry.js";
+import _copy_reporter from "../addons/copy-reporter/_manifest_entry.js";
 
 export default {
   "cat-blocks": _cat_blocks,
@@ -158,4 +160,6 @@ export default {
   "reorder-custom-inputs": _reorder_custom_inputs,
   "sounds-newgrounds-button": _sounds_newgrounds_button,
   "paint-reshape-tweaks": _paint_reshape_tweaks,
+  "editor-tweaks": _editor_tweaks,
+  "copy-reporter": _copy_reporter,
 };
