@@ -20,46 +20,15 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-
     - name: Setup GitHub Pages
       id: pages
       uses: actions/configure-pages@v1
-      
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: 6
-
     - name: Install Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v3
       with:
         node-version: 16.x
-        cache: 'pnpm'
-        
-    - name: Make sure webpack cache dir exists
-      run: |
-        mkdir -p ".webpack/cache1-babel"
-        mkdir -p ".webpack/cache2-postcss"
-        mkdir -p ".webpack/cache3-hard-source"
-
-    - name: Cache webpack build
-      uses: actions/cache@v3
-      with:
-        path: |
-            .webpack/cache1-babel
-            .webpack/cache2-postcss
-            .webpack/cache3-hard-source
-        key: ${{ runner.os }}-webpack-${{ hashFiles('**/webpack.config.js') }}-${{ hashFiles('package.json') }}
-        restore-keys: |
-          ${{ runner.os }}-webpack-
-
     - name: Install dependencies and build site
-      run: |
-        #npm i -g pnpm@v6
-        pnpm install --shamefully-hoist
-        #NODE_ENV="production"
-        webpack --bail --cache
-
+      run: npm i -g pnpm@v6 && pnpm up && pnpm i --shamefully-hoist --force && NODE_ENV="production" webpack --bail
     - name: Upload artifact 
       uses: actions/upload-pages-artifact@v3
       with:

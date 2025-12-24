@@ -3,7 +3,7 @@ import bindAll from 'lodash.bindall';
 import PropTypes from 'prop-types';
 import React from 'react';
 import localforage from 'localforage';
-import {defineMessages, injectIntl, intlShape} from 'react-intl';
+import {defineMessages, injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
 import LibraryItem from '../../containers/library-item.jsx';
 import Modal from '../../containers/modal.jsx';
@@ -313,9 +313,6 @@ class LibraryComponent extends React.Component {
                 id={this.props.id}
                 onRequestClose={this.handleClose}
             >
-                {/*
-                    todo: translation support?
-                */}
                 {this.props.header ? (
                     <h1
                         className={classNames(
@@ -346,23 +343,26 @@ class LibraryComponent extends React.Component {
                         className={classNames(styles.libraryFilterBar)}
                         style={this.state.collapsed ? { display: "none" } : null}
                     >
-                        {/*
-                            todo: translation?
-                        */}
-                        <h3 className={classNames(styles.whiteTextInDarkMode)}>Filters</h3>
+                        <h3 className={classNames(styles.whiteTextInDarkMode)}>
+                            <FormattedMessage
+                                defaultMessage="Filters"
+                                description="Header text for the filter controls in the asset picker"
+                                id="pm.library.filtersHeader"
+                            />
+                        </h3>
                         {this.props.filterable && (
                             <div>
-                                    <Filter
-                                        className={classNames(
-                                            styles.filterBarItem,
-                                            styles.filter
-                                        )}
-                                        filterQuery={this.state.filterQuery}
-                                        inputClassName={styles.filterInput}
-                                        placeholderText={this.props.intl.formatMessage(messages.filterPlaceholder)}
-                                        onChange={this.handleFilterChange}
-                                        onClear={this.handleFilterClear}
-                                    />
+                                <Filter
+                                    className={classNames(
+                                        styles.filterBarItem,
+                                        styles.filter
+                                    )}
+                                    filterQuery={this.state.filterQuery}
+                                    inputClassName={styles.filterInput}
+                                    placeholderText={this.props.intl.formatMessage(messages.filterPlaceholder)}
+                                    onChange={this.handleFilterChange}
+                                    onClear={this.handleFilterClear}
+                                />
                                 <Divider className={classNames(styles.filterBarItem, styles.divider)} />
                             </div>
                         )}

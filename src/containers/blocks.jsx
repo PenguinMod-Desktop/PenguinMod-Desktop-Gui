@@ -137,7 +137,8 @@ class Blocks extends React.Component {
             'onWorkspaceMetricsChange',
             'setBlocks',
             'setLocale',
-            'handleEnableProcedureReturns'
+            'handleEnableProcedureReturns',
+            'handleFieldBoxChange'
         ]);
         this.ScratchBlocks.prompt = this.handlePromptStart;
         this.ScratchBlocks.customPrompt = this.handleCustomPrompt;
@@ -360,6 +361,7 @@ class Blocks extends React.Component {
             .getWorkspace();
         this.flyoutWorkspace.addChangeListener(this.props.vm.flyoutBlockListener);
         this.flyoutWorkspace.addChangeListener(this.props.vm.monitorBlockListener);
+        this.flyoutWorkspace.addChangeListener(this.handleFieldBoxChange);
         this.props.vm.addListener('SCRIPT_GLOW_ON', this.onScriptGlowOn);
         this.props.vm.addListener('SCRIPT_GLOW_OFF', this.onScriptGlowOff);
         this.props.vm.addListener('BLOCK_GLOW_ON', this.onBlockGlowOn);
@@ -733,6 +735,32 @@ class Blocks extends React.Component {
     handleEnableProcedureReturns () {
         this.workspace.enableProcedureReturns();
         this.requestToolboxUpdate();
+    }
+    handleFieldBoxChange (args) {
+        // update checkbox states with menu-dependent blocks
+        if (args.element !== 'field') return;
+
+        const flyout = this.workspace.getFlyout();
+        if (!flyout) return;
+
+        // check if monitoring
+        const monitorState = this.props.vm.runtime.getMonitorState();
+        const id = args.blockId;
+        const value = String(args.newValue);
+        const shouldCheck = (
+            monitorState.get(`${id}_${value}`) !== undefined ||
+            monitorState.get(`${id}_${value.toLowerCase()}`) !== undefined
+        );
+
+        const checkbox = flyout.checkboxes_[id];
+        if (checkbox) {
+            checkbox.clicked = shouldCheck;
+            if (shouldCheck) {
+                this.ScratchBlocks.utils.addClass(checkbox.svgRoot, 'checked');
+            } else {
+                this.ScratchBlocks.utils.removeClass(checkbox.svgRoot, 'checked');
+            }
+        }
     }
     render () {
         /* eslint-disable no-unused-vars */

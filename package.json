@@ -96,7 +96,6 @@
     "startaudiocontext": "1.2.1",
     "style-loader": "^0.23.1",
     "text-encoding": "0.7.0",
-    "theia": "github:FreshPenguin112/theia-pnpm#master",
     "to-style": "1.3.3",
     "wav-encoder": "1.3.0",
     "xhr": "2.5.0"

@@ -1193,6 +1193,15 @@ const operators = function (isInitialSetup) {
                 </shadow>
             </value>
         </block>
+        <block type="operator_expandableCompare">
+        <mutation inputcount="2" menuvalues=""></mutation>
+            <value name="INPUT1">
+                <shadow type="text"><field name="TEXT"></field></shadow>
+            </value>
+            <value name="INPUT2">
+                <shadow type="text"><field name="TEXT"></field></shadow>
+            </value>
+        </block>
         ${blockSeparator}
         <block type="operator_trueBoolean"></block>
         <block type="operator_falseBoolean"></block>
@@ -1216,6 +1225,15 @@ const operators = function (isInitialSetup) {
         <block type="operator_not">
             <value name="OPERAND">
                 <shadow type="checkbox" />
+            </value>
+        </block>
+        <block type="operator_expandableBool">
+            <mutation inputcount="2" menuvalues=""></mutation>
+            <value name="BOOL1">
+                <shadow type="checkbox"><field name="CHECKBOX"></field></shadow>
+            </value>
+            <value name="BOOL2">
+                <shadow type="checkbox"><field name="CHECKBOX"></field></shadow>
             </value>
         </block>
         ${blockSeparator}
@@ -1487,28 +1505,12 @@ const liveTests = function () {
             <mutation proccode="tw:debugger;" argumentids="[]" warp="false" returns="null" edited="true" optype="null"></mutation>
         </block>
         ${blockSeparator}
-        <block type="operator_expandableBool">
-            <mutation inputcount="2" menuvalues=""></mutation>
-            <value name="BOOL1">
-                <shadow type="checkbox"><field name="CHECKBOX"></field></shadow>
-            </value>
-            <value name="BOOL2">
-                <shadow type="checkbox"><field name="CHECKBOX"></field></shadow>
-            </value>
-        </block>
-        <block type="operator_expandableCompare">
-        <mutation inputcount="2" menuvalues=""></mutation>
-            <value name="INPUT1">
-                <shadow type="text"><field name="TEXT"></field></shadow>
-            </value>
-            <value name="INPUT2">
-                <shadow type="text"><field name="TEXT"></field></shadow>
-            </value>
-        </block>
+        <block type="operator_checkboxBoolean"></block>
         <block type="control_fieldbutton"></block>
         <block type="motion_mutatorCheckboxTest"></block>
         ${blockSeparator}
         <block type="control_dualblock"></block>
+        <block type="test_spread"></block>
     </category>
     `;
 };

@@ -39,7 +39,7 @@ const messages = defineMessages({
     }
 });
 
-const customButtonStyle = (button) => {
+const customButtonStyle = button => {
     // if class is manually specified, dont try to guess the intended style
     if (button.class) {
         switch (button.class) {

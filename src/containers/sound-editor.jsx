@@ -479,7 +479,7 @@ class SoundEditor extends React.Component {
             slider.value = params.value;
 
             const input = document.createElement("input");
-            input.style = "text-align: center;width: 40px;border: solid 1px gray;border-radius: 10px;";
+            input.style = "text-align: center;width: 40px;border: solid 1px gray;border-radius: 10px;font-size: x-small;";
             input.type = "number";
             input.min = params.min * scalar;
             input.max = params.max * scalar;
