@@ -277,6 +277,9 @@ class Interface extends React.Component {
             loadServiceWorker();
         }
     }
+    componentDidMount () {
+        __TAURI__.core.invoke('set_complete', { task: 'frontend_load' });
+    }
     handleUpdateProjectTitle (title, isDefault) {
         if (isDefault || !title) {
             document.title = `PenguinMod - ${this.props.intl.formatMessage(messages.defaultTitle)}`;
