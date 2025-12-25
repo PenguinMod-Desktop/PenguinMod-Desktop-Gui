@@ -2707,23 +2707,23 @@
         "rotationCenterY": 24
     },
     {
-         "name": "Chucho",
-         "tags": [
-             "animal",
-             "animals",
-             "dog",
-             "pet",
-             "domestic",
-             "white",
-             "small",
-             "sitting"
-         ],
-         "bitmapResolution": 1,
-         "dataFormat": "png",
-         "rotationCenterX": 0,
-         "rotationCenterY": 0,
-         "fromPenguinModLibrary": true,
-         "libraryFilePage": "images/user/chucho.png"
+        "name": "Chucho",
+        "tags": [
+            "animal",
+            "animals",
+            "dog",
+            "pet",
+            "domestic",
+            "white",
+            "small",
+            "sitting"
+        ],
+        "bitmapResolution": 1,
+        "dataFormat": "png",
+        "rotationCenterX": 0,
+        "rotationCenterY": 0,
+        "fromPenguinModLibrary": true,
+        "libraryFilePage": "images/user/chucho.png"
     },
     {
         "name": "City Bus-a",
@@ -12093,24 +12093,24 @@
         "rotationCenterY": 80
     },
     {
-         "name": "Woody",
-         "tags": [
-             "animal",
-             "animals",
-             "dog",
-             "pet",
-             "domestic",
-             "white",
-             "brown",
-             "sitting",
-             "laying down"
-         ],
-         "bitmapResolution": 1,
-         "dataFormat": "png",
-         "rotationCenterX": 0,
-         "rotationCenterY": 0,
-         "fromPenguinModLibrary": true,
-         "libraryFilePage": "images/user/Woody.png"
+        "name": "Woody",
+        "tags": [
+            "animal",
+            "animals",
+            "dog",
+            "pet",
+            "domestic",
+            "white",
+            "brown",
+            "sitting",
+            "laying down"
+        ],
+        "bitmapResolution": 1,
+        "dataFormat": "png",
+        "rotationCenterX": 0,
+        "rotationCenterY": 0,
+        "fromPenguinModLibrary": true,
+        "libraryFilePage": "images/user/Woody.png"
     },
     {
         "name": "Zebra-a",
