@@ -255,7 +255,8 @@ class LibraryComponent extends React.Component {
     }
     createFilteredData () {
         const data = [].concat(
-            this.state.data,
+            this.custom_extensions,
+            this.state.data
         );
 
         const no_tags = this.state.selectedTags.length === 0;
@@ -292,7 +293,6 @@ class LibraryComponent extends React.Component {
         }
 
         const fully_filtered = [].concat(
-            this.custom_extensions,
             filtered.filter(item => (this.state.favorites.includes(item.extensionId))),
             filtered.filter(item => (!this.state.favorites.includes(item.extensionId)))
         ).map(item => Object.assign(item, { custom: !!item.custom }));

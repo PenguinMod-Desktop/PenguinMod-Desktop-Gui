@@ -82,6 +82,7 @@ import jwVectorExtensionThumb from './penguinmod/extensions/jwVector.svg';
 import jwLambdaExtensionThumb from './penguinmod/extensions/jwLambda.svg';
 import jwScopeExtensionThumb from './penguinmod/extensions/jwScope.svg';
 import jwXMLExtensionIcon from './penguinmod/extensions/jwXML.svg';
+import jwPointerExtensionThumb from './penguinmod/extensions/jwPointer.svg';
 
 import iygPerlinNoiseExtensionIcon from './penguinmod/extensions/perlinnoisebanner.png';
 
@@ -933,7 +934,16 @@ const menuItems = [
         extensionId: 'jwScope',
         iconURL: jwScopeExtensionThumb,
         tags: ['penguinmod'],
-        description: 'Temporary variables based on the block stack. (extra blocks included if Array extension is added)',
+        description: 'Temporary variables based on block stack. (extra blocks if used with Array extension)',
+        extDeveloper: 'jwklong',
+        featured: true
+    },
+    {
+        name: 'Pointers',
+        extensionId: 'jwPointer',
+        iconURL: jwPointerExtensionThumb,
+        tags: ['penguinmod', 'datamgmt'],
+        description: 'Define references to values. (extra blocks if used with Array extension)',
         extDeveloper: 'jwklong',
         featured: true
     },
