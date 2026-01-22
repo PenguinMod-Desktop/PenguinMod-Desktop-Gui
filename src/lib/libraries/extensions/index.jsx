@@ -83,6 +83,7 @@ import jwLambdaExtensionThumb from './penguinmod/extensions/jwLambda.svg';
 import jwScopeExtensionThumb from './penguinmod/extensions/jwScope.svg';
 import jwXMLExtensionIcon from './penguinmod/extensions/jwXML.svg';
 import jwPointerExtensionThumb from './penguinmod/extensions/jwPointer.svg';
+import jwIntExtensionThumb from './penguinmod/extensions/jwInt.svg';
 
 import iygPerlinNoiseExtensionIcon from './penguinmod/extensions/perlinnoisebanner.png';
 
@@ -944,6 +945,15 @@ const menuItems = [
         iconURL: jwPointerExtensionThumb,
         tags: ['penguinmod', 'datamgmt'],
         description: 'Define references to values. (extra blocks if used with Array extension)',
+        extDeveloper: 'jwklong',
+        featured: true
+    },
+    {
+        name: 'Integers',
+        extensionId: 'jwInt',
+        iconURL: jwIntExtensionThumb,
+        tags: ['penguinmod', 'math'],
+        description: 'Large integers with zero precision loss.',
         extDeveloper: 'jwklong',
         featured: true
     },
