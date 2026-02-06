@@ -1126,7 +1126,7 @@ const menuItems = [
                 id="pm.extraLibraryExtensions.name"
             />
         ),
-        href: 'https://extensions.penguinmod.com/',
+        href: 'https://extensions.penguinmod.com/?editor=true',
         extensionId: 'special_penguinmodExtensionLibrary',
         iconURL: penguinmodLibraryExtensionIcon,
         description: (
@@ -1464,6 +1464,22 @@ if (IsLocal || IsLiveTests) {
             extensionId: 'special_editorExtensionLibrary',
             iconURL: penguinmodLibraryExtensionIcon,
             description: 'Opens the editor with this tab as the parent, still with the library opened. For developers.',
+            featured: true
+        },
+        {
+            name: 'localhost:5173',
+            href: 'http://localhost:5173',
+            extensionId: 'special_extensionLibraryLocalhost5173',
+            iconURL: defaultExtensionIcon,
+            description: 'Opens localhost:5173 in a new tab with this tab as the parent. For developers',
+            featured: true
+        },
+        {
+            name: 'localhost:5173?editor=true',
+            href: 'http://localhost:5173?editor=true',
+            extensionId: 'special_extensionLibraryLocalhost5173EditorTrue',
+            iconURL: defaultExtensionIcon,
+            description: 'Opens localhost:5173 in a new tab with this tab as the parent. Sets ?editor=true. For developers',
             featured: true
         },
         {

@@ -50,6 +50,8 @@ const TRUSTED_LOADEXT_ORIGINS = [
     'https://sharkpools-extensions.vercel.app',
     'https://raw.githubusercontent.com/SharkPool-SP/SharkPools-Extensions/main', // Some people cant connect to vercel
     'https://pen-group.github.io',
+    'http://localhost:5173', // for development
+    'http://localhost:3000', // for development
 ];
 
 class ExtensionLibrary extends React.PureComponent {
@@ -113,12 +115,14 @@ class ExtensionLibrary extends React.PureComponent {
             return;
         }
         // load the extension like any other custom extension url (this means sandboxing for some urls)
+        console.log("Received request to load", extensionId, "from", e.origin);
         if (this.props.vm.extensionManager.isExtensionLoaded(extensionId)) {
             this.props.onCategorySelected(extensionId);
             // i mean, technically we succeeded
             e.source.postMessage({
                 p4: {
-                    type: 'success'
+                    type: 'success',
+                    extensionId
                 }
             }, e.origin);
         } else {
@@ -128,7 +132,8 @@ class ExtensionLibrary extends React.PureComponent {
                     // succeeded
                     e.source.postMessage({
                         p4: {
-                            type: 'success'
+                            type: 'success',
+                            extensionId
                         }
                     }, e.origin);
                 })
@@ -167,7 +172,7 @@ class ExtensionLibrary extends React.PureComponent {
             return;
         }
         if (extensionId === 'special_penguinmodExtensionLibrary') {
-            window.open('https://extensions.penguinmod.com/');
+            window.open('https://extensions.penguinmod.com/?editor=true');
             return;
         }
         const url = (item.extensionURL ? item.extensionURL : extensionId);
