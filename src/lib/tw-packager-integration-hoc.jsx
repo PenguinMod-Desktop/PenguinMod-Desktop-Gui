@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import log from './log';
 import { getIsShowingProject } from '../reducers/project-state';
 
-const PACKAGER_URL = 'https://studio.penguinmod.com/PenguinMod-Packager';
-const PACKAGER_ORIGIN = "https://studio.penguinmod.com";
+const PACKAGER_ORIGIN =
+    process.env.NODE_ENV === "production"
+        ? "http://tauri.localhost"
+        : "http://127.0.0.1:1430";
 
 const PackagerIntegrationHOC = function (WrappedComponent) {
     class PackagerIntegrationComponent extends React.Component {
@@ -22,7 +24,40 @@ const PackagerIntegrationHOC = function (WrappedComponent) {
         }
         handleClickPackager() {
             if (this.props.canOpenPackager) {
-                window.open(`${PACKAGER_URL}/?import_from=${location.origin}`);
+                // Setup events
+
+                const current = window.__TAURI__.webviewWindow.getCurrentWebviewWindow();
+                const label = "packager"
+                const postMessage = (name, data) => current.emitTo(label, 'import', {
+                    type: name,
+                    ...data
+                });
+
+                current.once('ready-for-import', () => {
+                    postMessage('start-import', {});
+
+                    this.props.vm.saveProjectSb3('arraybuffer')
+                        .then(buffer => {
+                            const name = `${this.props.reduxProjectTitle}.pmp`;
+                            postMessage('finish-import', {
+                                data: buffer,
+                                name
+                            });
+                        })
+                        .catch(err => {
+                            log.error(err);
+                            postMessage('cancel-import', {});
+                        });
+                });
+
+                // Open packager window
+                const path = `${process.env.ROUTING_STYLE === "wildcard" ? "packager" : "packager.html"}?import_from_tauri`;
+                new window.__TAURI__.webviewWindow.WebviewWindow(label, {
+                    url: path,
+                    title: "Packager",
+                    width: 800,
+                    height: 600
+                });
             }
         }
         handleMessage(e) {
