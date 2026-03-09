@@ -1096,15 +1096,17 @@ export default async function ({ addon, console, msg }) {
           const valueElement = document.createElement("value");
           valueElement.setAttribute("name", inputName);
 
-          const shadowElement = document.createElement("shadow");
-          shadowElement.setAttribute("type", inputData.shadowType);
+          if (inputData.shadowType) {
+            const shadowElement = document.createElement("shadow");
+            shadowElement.setAttribute("type", inputData.shadowType);
 
-          const shadowFieldElement = document.createElement("field");
-          shadowFieldElement.setAttribute("name", getShadowFieldName(inputData.shadowType));
-          shadowFieldElement.innerText = callIfFunction(inputData.value);
+            const shadowFieldElement = document.createElement("field");
+            shadowFieldElement.setAttribute("name", getShadowFieldName(inputData.shadowType));
+            shadowFieldElement.innerText = callIfFunction(inputData.value);
 
-          shadowElement.appendChild(shadowFieldElement);
-          valueElement.appendChild(shadowElement);
+            shadowElement.appendChild(shadowFieldElement);
+            valueElement.appendChild(shadowElement);
+          }
           xml.appendChild(valueElement);
         }
       }
