@@ -141,6 +141,28 @@ runAddons();
 //     return projectDetailCache[String(id)];
 // };
 
+const openPackager = () => {
+    // Open packager window
+    const path = `${process.env.ROUTING_STYLE === "wildcard" ? "packager" : "packager.html"}`;
+    new window.__TAURI__.webviewWindow.WebviewWindow("packager", {
+        url: path,
+        title: "Packager",
+        width: 800,
+        height: 600
+    });
+}
+
+const openCredits = () => {
+    // Open credits window
+    const path = `${process.env.ROUTING_STYLE === "wildcard" ? "credits" : "credits.html"}`;
+    new window.__TAURI__.webviewWindow.WebviewWindow("credits", {
+        url: path,
+        title: "Credits",
+        width: 1200,
+        height: 600
+    });
+}
+
 const Footer = () => (
     <footer className={styles.footer}>
         <div className={styles.footerContent}>
@@ -154,14 +176,14 @@ const Footer = () => (
             </div>
             <div className={styles.footerColumns}>
                 <div className={styles.footerSection}>
-                    <a href="credits.html">
+                    <a onClick={openCredits}>
                         <FormattedMessage
                             defaultMessage="Credits"
                             description="Credits link in footer"
                             id="tw.footer.credits"
                         />
                     </a>
-                    <a href="https://penguinmod.com/donate">
+                    <a target="_blank" href="https://penguinmod.com/donate">
                         <FormattedMessage
                             defaultMessage="Donate"
                             description="Donation link in footer"
@@ -170,29 +192,25 @@ const Footer = () => (
                     </a>
                 </div>
                 <div className={styles.footerSection}>
-                    <a href="https://studio.penguinmod.com/PenguinMod-Packager">
+                    <a onClick={openPackager}>
                         {/* Do not translate */}
                         {'PenguinMod Packager'}
                     </a>
-                    <a href="https://desktop.turbowarp.org/">
-                        {/* Do not translate */}
-                        {'TurboWarp Desktop'}
-                    </a>
-                    <a href="https://docs.turbowarp.org/embedding">
+                    <a target="_blank" href="https://docs.turbowarp.org/embedding">
                         <FormattedMessage
                             defaultMessage="Embedding"
                             description="Link in footer to embedding documentation for embedding link"
                             id="tw.footer.embed"
                         />
                     </a>
-                    <a href="https://docs.turbowarp.org/url-parameters">
+                    <a target="_blank" href="https://docs.turbowarp.org/url-parameters">
                         <FormattedMessage
                             defaultMessage="URL Parameters"
                             description="Link in footer to URL parameters documentation"
                             id="tw.footer.parameters"
                         />
                     </a>
-                    <a href="https://docs.turbowarp.org/">
+                    <a target="_blank" href="https://docs.turbowarp.org/">
                         <FormattedMessage
                             defaultMessage="Documentation"
                             description="Link in footer to additional documentation"
@@ -201,28 +219,28 @@ const Footer = () => (
                     </a>
                 </div>
                 <div className={styles.footerSection}>
-                    <a href="https://penguinmod.com/terms">
+                    <a target="_blank" href="https://penguinmod.com/terms">
                         <FormattedMessage
                             defaultMessage="Terms of Service"
                             description="Link to Terms of Service"
                             id="pm.terms"
                         />
                     </a>
-                    <a href="https://penguinmod.com/privacy">
+                    <a target="_blank" href="https://penguinmod.com/privacy">
                         <FormattedMessage
                             defaultMessage="Privacy Policy"
                             description="Link to privacy policy"
                             id="tw.privacy"
                         />
                     </a>
-                    <a href="https://github.com/PenguinMod/PenguinMod-Home/issues">
+                    <a target="_blank" href="https://github.com/PenguinMod/PenguinMod-Home/issues">
                         <FormattedMessage
                             defaultMessage="Feedback & Bugs"
                             description="Link to feedback/bugs page"
                             id="tw.feedback"
                         />
                     </a>
-                    <a href="https://github.com/PenguinMod">
+                    <a target="_blank" href="https://github.com/PenguinMod-Desktop">
                         <FormattedMessage
                             defaultMessage="Source Code"
                             description="Link to source code"

@@ -55,7 +55,7 @@ const BrowserModal = ({intl, ...props}) => {
                                     id="tw.webglModal.description"
                                     values={{
                                         webGlLink: (
-                                            <a href="https://get.webgl.org/">
+                                            <a target="_blank" href="https://get.webgl.org/">
                                                 <FormattedMessage
                                                     defaultMessage="does not support WebGL"
                                                     description="link part of your browser does not support WebGL message"
@@ -80,7 +80,7 @@ const BrowserModal = ({intl, ...props}) => {
                                     id="tw.lockdownMode"
                                     values={{
                                         lockdownMode: (
-                                            <a href="https://support.apple.com/en-us/HT212650">
+                                            <a target="_blank" href="https://support.apple.com/en-us/HT212650">
                                                 <FormattedMessage
                                                     defaultMessage="Lockdown Mode"
                                                     description="Links to an Apple support page about Lockdown Mode: https://support.apple.com/en-us/HT212650 Try to translate this the same as Apple."

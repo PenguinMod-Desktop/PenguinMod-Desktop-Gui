@@ -67,17 +67,25 @@ const Credits = () => (
                 Thank you to everyone who worked on Scratch and TurboWarp,
                 you have made many people finally be able to make whatever they can imagine.
             </p>
-            <a href="https://scratch.mit.edu/donate">
+            <a  target="_blank"href="https://scratch.mit.edu/donate">
                 Donate to support Scratch.
             </a>
             <br></br><br></br>
-            <a href="https://github.com/sponsors/GarboMuffin">
+            <a  target="_blank"href="https://github.com/sponsors/GarboMuffin">
                 Donate to support TurboWarp.
             </a>
+            <h2>PenguinMod Desktop</h2>
+            <p>
+                PenguinMod Desktop is currently only developed by <a target="_blank" href="https://github.com/scsupercraft">SCsupercraft</a>.
+                <br></br>
+                <a target="_blank" href="https://github.com/scsupercraft">
+                    <img src="https://avatars.githubusercontent.com/u/103709272?v=4" style={{ width: "128px" }}></img>
+                </a>
+            </p>
             <h2>Contributors</h2>
             <p>
                 PenguinMod is made by a small bunch of developers.
-                A list is below, but you can also check <a href="https://github.com/orgs/PenguinMod/people">our GitHub</a> incase this one is out of date.
+                A list is below, but you can also check <a target="_blank" href="https://github.com/orgs/PenguinMod/people">our GitHub</a> incase this one is out of date.
             </p>
             <UserList users={UserData.pmDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
@@ -91,13 +99,13 @@ const Credits = () => (
             <UserList users={UserData.pmCodeUsedFrom} />
             <p><i>The list order is randomized on each refresh.</i></p>
             <ul>
-                <li>Code for "Center" option in Costume editor is from <a href="https://github.com/Nitro-Bolt/scratch-paint/blob/develop/src/containers/mode-tools.jsx#L203-L216">Cubester@Nitro-Bolt</a></li>
+                <li>Code for "Center" option in Costume editor is from <a target="_blank" href="https://github.com/Nitro-Bolt/scratch-paint/blob/develop/src/containers/mode-tools.jsx#L203-L216">Cubester@Nitro-Bolt</a></li>
             </ul>
         </section>
         <section>
             <h2>GitHub Pages</h2>
-            <p>We currently use <a href="https://pages.github.com/">GitHub Pages</a> to host PenguinMod.</p>
-            <a href="https://pages.github.com/">
+            <p>We currently use <a target="_blank" href="https://pages.github.com/">GitHub Pages</a> to host PenguinMod.</p>
+            <a target="_blank" href="https://pages.github.com/">
                 <img
                     src="https://raw.githubusercontent.com/github/explore/80688e429a7d4ef2fca1e82350fe8e3517d3494d/collections/github-pages-examples/github-pages-examples.png"
                     width="160"
@@ -106,24 +114,24 @@ const Credits = () => (
             </a>
             <h2>Domain Provider</h2>
             <p>
-                <a href="https://penguinmod.com">penguinmod.com</a> (and any subdomains) are currently
-                provided by <a href="https://github.com/enderhacker">enderhacker</a>.
+                <a target="_blank" href="https://penguinmod.com">penguinmod.com</a> (and any subdomains) are currently
+                provided by <a target="_blank" href="https://github.com/enderhacker">enderhacker</a>.
                 <br></br>
-                <a href="https://github.com/enderhacker">
+                <a target="_blank" href="https://github.com/enderhacker">
                     <img src="https://avatars.githubusercontent.com/u/61245488?v=4" style={{ width: "128px" }}></img>
                 </a>
             </p>
             <h2>Server Host</h2>
             <p>
-                PenguinMod's Project Sharing server is currently hosted by <a href="https://github.com/ianyourgod">ianyourgod</a>.
+                PenguinMod's Project Sharing server is currently hosted by <a target="_blank" href="https://github.com/ianyourgod">ianyourgod</a>.
                 <br></br>
-                <a href="https://github.com/ianyourgod">
+                <a target="_blank" href="https://github.com/ianyourgod">
                     <img src="https://avatars.githubusercontent.com/u/104151459?v=4" style={{ width: "128px" }}></img>
                 </a>
             </p>
             <p>
                 The PenguinMod Server API is maintained by many people.
-                A list is below, but you can also check <a href="https://github.com/PenguinMod/PenguinMod-IntermediateBackendApi/graphs/contributors">the GitHub repository</a> incase this one is out of date.
+                A list is below, but you can also check <a target="_blank" href="https://github.com/PenguinMod/PenguinMod-IntermediateBackendApi/graphs/contributors">the GitHub repository</a> incase this one is out of date.
             </p>
             <UserList users={UserData.pmApiDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
@@ -131,8 +139,8 @@ const Credits = () => (
             <p>
                 All PenguinMod costumes are downloaded or created from:
                 <ul>
-                    <li><a href="https://publicdomainvectors.org/">https://publicdomainvectors.org/</a></li>
-                    <li><a href="https://discord.gg/NZ9MBMYTZh">User-submissions from the PenguinMod Discord Server</a></li>
+                    <li><a target="_blank" href="https://publicdomainvectors.org/">https://publicdomainvectors.org/</a></li>
+                    <li><a target="_blank" href="https://discord.gg/NZ9MBMYTZh">User-submissions from the PenguinMod Discord Server</a></li>
                     <li>The PenguinMod Developers</li>
                 </ul>
                 All costumes exclusive to PenguinMod are included under Public Domain licenses or licenses such as MIT and CC0.
@@ -144,10 +152,10 @@ const Credits = () => (
             <p>
                 All PenguinMod sounds are downloaded or created from:
                 <ul>
-                    <li><a href="https://freesound.org/">https://freesound.org/</a></li>
-                    <li><a href="https://opengameart.org/">https://opengameart.org/</a> (only Public Domain ones)</li>
-                    <li><a href="https://archive.org/">https://archive.org/</a></li>
-                    <li><a href="https://discord.gg/NZ9MBMYTZh">User-submissions from the PenguinMod Discord Server</a></li>
+                    <li><a target="_blank" href="https://freesound.org/">https://freesound.org/</a></li>
+                    <li><a target="_blank" href="https://opengameart.org/">https://opengameart.org/</a> (only Public Domain ones)</li>
+                    <li><a target="_blank" href="https://archive.org/">https://archive.org/</a></li>
+                    <li><a target="_blank" href="https://discord.gg/NZ9MBMYTZh">User-submissions from the PenguinMod Discord Server</a></li>
                     <li>The PenguinMod Developers</li>
                 </ul>
                 All sounds exclusive to PenguinMod are included under Public Domain licenses or licenses such as MIT and CC0.
@@ -157,8 +165,8 @@ const Credits = () => (
             <p><i>The list order is randomized on each refresh.</i></p>
             <h2>Accounts</h2>
             <p>
-                Scratch login on PenguinMod is managed with <a href="https://oauth2.scratch-wiki.info/">ScratchOAuth2</a>,
-                see their <a href="https://github.com/ScratchVerifier/ScratchOAuth2">GitHub repository</a>.
+                Scratch login on PenguinMod is managed with <a target="_blank" href="https://oauth2.scratch-wiki.info/">ScratchOAuth2</a>,
+                see their <a target="_blank" href="https://github.com/ScratchVerifier/ScratchOAuth2">GitHub repository</a>.
                 <br />
                 <br />
                 <i>
@@ -178,7 +186,7 @@ const Credits = () => (
             </i></p>
             <p>
                 We use some MIT licensed extensions from TurboWarp as they are really useful!
-                Check out the full list of TurboWarp extensions <a href="https://extensions.turbowarp.org/">here</a>,
+                Check out the full list of TurboWarp extensions <a target="_blank" href="https://extensions.turbowarp.org/">here</a>,
                 and see individual contributors below:
             </p>
             <UserList users={UserData.extensionDevelopers} />
@@ -191,7 +199,7 @@ const Credits = () => (
             <p><i>The list order is randomized on each refresh.</i></p>
             <p>
                 The Scratch Auth extension has a login system managed with <a href="https://auth.itinerary.eu.org/">Scratch Auth</a>,
-                created by <a href="https://scratch.mit.edu/users/Looky1173/">Looky1173</a>.
+                created by <a target="_blank" href="https://scratch.mit.edu/users/Looky1173/">Looky1173</a>.
                 (thanks for adding us to the user list!)
                 <br />
                 <br />
@@ -204,7 +212,7 @@ const Credits = () => (
         <section>
             <h2>Addons</h2>
             <p>
-                Here are the developers that made the addons from <a href="https://scratchaddons.com/">Scratch Addons</a> available.
+                Here are the developers that made the addons from <a target="_blank" href="https://scratchaddons.com/">Scratch Addons</a> available.
             </p>
             <UserList users={UserData.addonDevelopers} />
             <p><i>The list order is randomized on each refresh.</i></p>
@@ -217,9 +225,9 @@ const Credits = () => (
             <p>
                 The TurboWarp project is made possible by the work of many volunteers.
                 <br></br>
-                You can check out TurboWarp's individual credits <a href="https://turbowarp.org/credits.html">here</a>.
+                You can check out TurboWarp's individual credits <a target="_blank" href="https://turbowarp.org/credits.html">here</a>.
                 <br></br>
-                <a href="https://github.com/sponsors/GarboMuffin">
+                <a target="_blank" href="https://github.com/sponsors/GarboMuffin">
                     Donate to support TurboWarp.
                 </a>
             </p>
@@ -246,10 +254,10 @@ const Credits = () => (
         <section>
             <h2>Scratch</h2>
             <p>
-                TurboWarp is based on the work of the <a href="https://scratch.mit.edu/credits">Scratch contributors</a> but is not endorsed by Scratch in any way.
+                TurboWarp is based on the work of the <a target="_blank" href="https://scratch.mit.edu/credits">Scratch contributors</a> but is not endorsed by Scratch in any way.
             </p>
             <p>
-                <a href="https://scratch.mit.edu/donate">
+                <a target="_blank" href="https://scratch.mit.edu/donate">
                     Donate to support Scratch.
                 </a>
             </p>
