@@ -67,11 +67,11 @@ const Credits = () => (
                 Thank you to everyone who worked on Scratch and TurboWarp,
                 you have made many people finally be able to make whatever they can imagine.
             </p>
-            <a  target="_blank"href="https://scratch.mit.edu/donate">
+            <a target="_blank" href="https://scratch.mit.edu/donate">
                 Donate to support Scratch.
             </a>
             <br></br><br></br>
-            <a  target="_blank"href="https://github.com/sponsors/GarboMuffin">
+            <a target="_blank" href="https://github.com/sponsors/GarboMuffin">
                 Donate to support TurboWarp.
             </a>
             <h2>PenguinMod Desktop</h2>
