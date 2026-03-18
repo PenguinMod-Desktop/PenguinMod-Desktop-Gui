@@ -47,6 +47,17 @@ class Storage extends ScratchStorage {
             die,
             die,
         );
+        this.addWebStore(
+            [
+                this.AssetType.ImageVector,
+                this.AssetType.ImageBitmap,
+                this.AssetType.Sound,
+                this.AssetType.Font,
+            ],
+            this.getAssetBackupGetConfig.bind(this),
+            die,
+            die,
+        );
     }
     setProjectHost(projectHost) {
         this.projectHost = projectHost;
@@ -70,6 +81,13 @@ class Storage extends ScratchStorage {
         }
 
         return `${this.assetHost}/${this.projectId}_${asset.assetId}.${asset.dataFormat}`;
+    }
+    getAssetBackupGetConfig(asset) {
+        if (!this.projectId) {
+            return `https://assets.scratch.mit.edu/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`;
+        }
+
+        return `https://projects.penguinmod.com/api/v1/projects/backupassetget?asset_name=${this.projectId}_${asset.assetId}.${asset.dataFormat}`;
     }
     getScratchAssetGetConfig(asset) {
         return `https://assets.scratch.mit.edu/internalapi/asset/${asset.assetId}.${asset.dataFormat}/get/`;
