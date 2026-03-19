@@ -1,6 +1,7 @@
 import JSZip from 'jszip';
 import uid from './uid';
 import { stringify, parse } from './json-circular';
+import downloadBlob from "./download-blob.js";
 
 /**
  * String.prototype.indexOf, but it returns NaN not -1 on failure
@@ -181,15 +182,7 @@ const downloadLogs = async () => {
         });
     }
     */
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    document.body.append(a);
-    const url = window.URL.createObjectURL(blob);
-    a.href = url;
-    a.download = filename;
-    a.click();
-    window.URL.revokeObjectURL(url);
-    a.remove();
+    downloadBlob(filename, blob);
 };
 window.downloadLogs = downloadLogs;
 
