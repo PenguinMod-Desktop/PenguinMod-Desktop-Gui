@@ -102,11 +102,22 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 });
             }
             let assetPromise;
+            let projectUrl = null;
+            let importFromTauri = false;
             // In case running in node...
-            let projectUrl =
-                typeof URLSearchParams === "undefined"
-                    ? null
-                    : new URLSearchParams(location.search).get("project_url");
+            if (typeof URLSearchParams !== "undefined")  {
+                const params = new URLSearchParams(location.search);
+                
+                if (params.has("import_from_tauri")) {
+                    importFromTauri = true;
+                    params.delete("import_from_tauri");
+                    history.replaceState(null, '', '?' + params.toString());
+                } else if (params.has("project_url")) {
+                    projectUrl = params.get("project_url");
+                    params.delete("project_url");
+                    history.replaceState(null, '', '?' + params.toString());
+                }
+            }
             if (projectUrl) {
                 if (
                     !projectUrl.startsWith("http:") &&
@@ -132,6 +143,34 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                         return r.arrayBuffer();
                     })
                     .then((buffer) => ({ data: buffer }));
+            } else if (importFromTauri) {
+                console.log("Attempting to import from tauri")
+                // TODO: Create a mock file handle using Tauri APIs to allow for the user to save to the file.
+
+                progressMonitor.setState(1);
+                assetPromise = new Promise((resolve) => {
+                    window.__TAURI__.event.once("startup-file", (event) => {
+                        console.log("Received file from tauri");
+
+                        const uint8 = new Uint8Array(event.payload);
+                        const arrayBuffer = uint8.buffer;
+
+                        progressMonitor.setProgress(1);
+                        resolve(arrayBuffer);
+                    });
+
+                    window.__TAURI__.core.invoke("request_startup_file");
+                })
+                .then((buf) => {
+                    if (
+                        this.props.vm.runtime.renderer?.setPrivateSkinAccess
+                    )
+                        this.props.vm.runtime.renderer.setPrivateSkinAccess(
+                            false,
+                        );
+                    return buf;
+                })
+                .then((buffer) => ({ data: buffer }));
             } else {
                 // patch for default project
                 if (projectId === "0") {

@@ -30,7 +30,7 @@ const queueProgressHandlerUpdate = () => {
     }
 };
 
-const setProgress = progress => {
+export const setProgress = progress => {
     if (progress < 0) {
         progress = 0;
     }
@@ -41,7 +41,7 @@ const setProgress = progress => {
     queueProgressHandlerUpdate();
 };
 
-const setState = newState => {
+export const setState = newState => {
     if (state === newState) {
         return;
     }
