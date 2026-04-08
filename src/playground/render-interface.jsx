@@ -471,15 +471,29 @@ class Interface extends React.Component {
                             {projectId !== '0' && extraProjectInfo.author && (
                                 <div>
                                     {isUpdated ?
-                                        <FormattedMessage
-                                            defaultMessage="Updated {date}"
-                                            description="The date at which the project was updated"
-                                            id="pm.projectFooter.updatedAt"
-                                            values={{
-                                                date: extraProjectInfo.releaseDate.toLocaleString()
-                                            }}
-                                        /> :
-                                        <FormattedMessage
+                                        <div>
+                                            <FormattedMessage
+                                                defaultMessage="Updated {date}"
+                                                description="The date at which the project was updated"
+                                                id="pm.projectFooter.updatedAt"
+                                                values={{
+                                                    date: extraProjectInfo.releaseDate.toLocaleString(),
+                                                }}
+                                            />
+                                            <br></br>
+                                            <div style={{ fontSize: "15px", color: "#7a7a7a" }}>
+                                                <FormattedMessage
+                                                    defaultMessage="Originally Uploaded {date}"
+                                                    description="The date at which the project was uploaded"
+                                                    id="pm.projectFooter.originallyUploadedAt"
+                                                    
+                                                    values={{
+                                                        date: extraProjectInfo.uploadDate.toLocaleString(),
+                                                    }}
+                                                />
+                                            </div>
+                                        </div>
+                                        : <FormattedMessage
                                             defaultMessage="Uploaded {date}"
                                             description="The date at which the project was uploaded"
                                             id="pm.projectFooter.uploadedAt"
