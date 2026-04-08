@@ -25,6 +25,99 @@ const fromHardcodedNamed = username => ({
     text: username
 });
 
+// doing it like this for now since this is how we have it in the disc server
+const pmSupportersText = `
+jwklong (https://penguinmod.com/profile?user=jwklong)
+lord cat (https://penguinmod.com/profile?user=lordcat) (discord: lordcat__)
+qloak (discord: qloakalt)
+bubasxd (https://penguinmod.com/profile?user=bubasxd) (discord: bubasgaming)
+anonymous_cat1 (https://penguinmod.com/profile?user=anonymous_cat1)
+silverstero
+evilvowel_murdersscarykiller
+jpsAR (https://penguinmod.com/profile?user=jpsar) (discord: jpsar_)
+CarrotD1scord (https://penguinmod.com/profile?user=CarrotScr4tch) (discord: carrotd1scord)
+anonygoose (https://penguinmod.com/profile?user=anonygoose)
+legume1
+ianyourgod (https://penguinmod.com/profile?user=ianyourgod)
+MubiLop (https://penguinmod.com/profile?user=mubilop)
+keura (https://penguinmod.com/profile?user=keura) (discord: thekeura)
+10000000_fireflies
+adurrina
+jeremygamer13 (https://penguinmod.com/profile?user=jeremygamer13)
+glacialtemptation
+camthekirby
+redman13 (https://penguinmod.com/profile?user=redman13) (discord: godslayerakp)
+joshatticus
+krkika
+mralien7893 (https://en.pronouns.page/@Mr.Alien7893) (discord: mr.alien)
+gunner_the_bear
+autoimi
+.funkoid
+tech_wizard72
+koffeejava (https://penguinmod.com/profile?user=koffeejava)
+MrRedstonia (https://mrredstonia.com/) (discord: mrredstonia)
+vchi5332664 (https://penguinmod.com/profile?user=vchi5332664) (discord: vchidev2487)
+windowsbuild3r
+atomicoperations
+joe (https://penguinmod.com/profile?user=joe) (discord: puzzlingggg)
+algebruh_35
+giganttech (https://penguinmod.com/profile?user=giganttech)
+wwtv1 (https://penguinmod.com/profile?user=wwtv1) (discord: wwtv2346)
+freshpenguin112 (https://penguinmod.com/profile?user=freshpenguin112)
+stealpop_games
+TPR (https://penguinmod.com/profile?user=tpr)
+kypo
+alpacalii (https://penguinmod.com/profile?user=alpacalii)
+vedal (https://penguinmod.com/profile?user=vedal) (discord: itzkingfrfr)
+TheShovel (https://penguinmod.com/profile?user=theshovel)
+electricfuzzball_pm (https://www.youtube.com/@ElectricFuzzball_YT) (discord: electricfuzzball_official)
+gug. [iamgugreal1939] (https://penguinmod.com/profile?user=kiwi) (discord: iamgugreal1939)
+aubreymcleen (https://penguinmod.com/profile?user=aubreymcleen) (discord: 2faceaub)
+kylomaskgamer (https://kylomaskgamer.ca/) (discord: kylomaskgamer)
+afk (https://penguinmod.com/profile?user=afk) (discord: aefarkalibastafinfein)
+`;
+const pmSupporterImage = (username) => {
+    switch (username) {
+        case "mralien7893":
+            return "https://projects.penguinmod.com/api/v1/users/getpfp?username=mralien7893";
+        case "electricfuzzball_pm":
+            return "https://projects.penguinmod.com/api/v1/users/getpfp?username=electricfuzzball_pm";
+        case "kylomaskgamer":
+            return "https://projects.penguinmod.com/api/v1/users/getpfp?username=kylomaskgamer";
+        case "MrRedstonia":
+            return "https://projects.penguinmod.com/api/v1/users/getpfp?username=mrredstonia";
+        default:
+            return `https://penguinmod.com/unknown_user.png`;
+    }
+};
+const pmSupporterImageFromLine = (line) => {
+    const match = line.match(/penguinmod\.com\/profile\?user=([a-zA-Z0-9_-]+)/);
+    return match ? `https://projects.penguinmod.com/api/v1/users/getpfp?username=${match[1]}` : null;
+};
+const pmSupporters = pmSupportersText
+    .replace(/\r/g, "")
+    .split('\n')
+    .map(line => line.trim())
+    .filter(line => !!line)
+    .map(line => {
+        const bracketSection = line.indexOf(" [");
+        const linkSection = line.indexOf(" (");
+
+        // use full text if no "name [fullname]" or "name (link) (etc)"
+        const username = linkSection === -1 && bracketSection === -1 ? line : line.slice(0, bracketSection === -1 ? linkSection : bracketSection);
+        const image = pmSupporterImageFromLine(line) || pmSupporterImage(username);
+
+        // getting url has ( at the start with this regex
+        const linkMatch = line.match(/\(([^\)]+)/gm);
+        const potentialLink = !linkMatch ? "https://studio.penguinmod.com/credits.html#" :
+            (`${linkMatch[0]}`.slice(1));
+        return {
+            text: username,
+            image,
+            href: potentialLink.startsWith("https://") ? potentialLink : "https://studio.penguinmod.com/credits.html#",
+        };
+    });
+
 const addonDevelopers = [
     {
         userId: '34018398',
@@ -174,7 +267,7 @@ const pmPullRequestDevelopers = [ // these people made a PR that got merged, or 
     },
     {
         text: 'ilikecoding-197',
-        image: `https://github.com/ilikecoding-197.png`,
+        image: `https://penguinmod.com/unknown_user.png`,
         href: `https://github.com/ilikecoding-197/`,
     },
     {
@@ -216,7 +309,7 @@ const pmApiDevelopers = [
 const pmTranslators = [
     {
         text: 'Mildanner',
-        image: `https://avatars.githubusercontent.com/u/179844994`,
+        image: `https://penguinmod.com/unknown_user.png`,
         href: "https://github.com/mildannerofc",
     },
     {
@@ -404,6 +497,16 @@ const pmTranslators = [
         image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=Prode`,
         href: "https://penguinmod.com/profile?user=Prode",
     },
+    {
+        text: 'afk',
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=afk`,
+        href: "https://penguinmod.com/profile?user=afk",
+    },
+    {
+        text: 'phi_wpentomino',
+        image: `https://projects.penguinmod.com/api/v1/users/getpfp?username=phi_wpentomino`,
+        href: "https://penguinmod.com/profile?user=phi_wpentomino",
+    },
 ];
 
 const pmCostumeSubmittors = [
@@ -504,8 +607,8 @@ const pmCostumeSubmittors = [
     },
     {
         text: 'mildannerofc',
-        image: `https://github.com/mildannerofc.png`,
-        href: `https://github.com/mildannerofc/`,
+        image: `https://penguinmod.com/unknown_user.png`,
+        href: "https://studio.penguinmod.com/credits.html#",
     },
     {
         text: 'bonemaster96',
@@ -679,8 +782,8 @@ const pmCostumeSubmittors = [
     },
     {
         text: "FloppyDisk_OSC",
-        image: "https://projects.penguinmod.com/api/v1/users/getpfp?username=FloppyDisk_OSC",
-        href: "https://penguinmod.com/profile?user=FloppyDisk_OSC",
+        image: `https://penguinmod.com/unknown_user.png`,
+        href: "https://studio.penguinmod.com/credits.html#",
     },
     {
         text: "dogstudiostuff",
@@ -689,8 +792,8 @@ const pmCostumeSubmittors = [
     },
     {
         text: "oldalx2020",
-        image: `https://github.com/oldalx2020.png`,
-        href: `https://github.com/oldalx2020/`,
+        image: `https://penguinmod.com/unknown_user.png`,
+        href: "https://studio.penguinmod.com/credits.html#",
     },
     {
         text: "DogeIsCut",
@@ -891,8 +994,8 @@ const pmSoundSubmittors = [
     },
     {
         text: 'furbyguy',
-        image: `https://freesound.org/data/avatars/5829/5829171_XL.jpg`,
-        href: "https://freesound.org/people/furbyguy/",
+        image: `https://penguinmod.com/unknown_user.png`,
+        href: "https://studio.penguinmod.com/credits.html#",
     },
     {
         text: 'cynicmusic',
@@ -916,8 +1019,8 @@ const pmSoundSubmittors = [
     },
     {
         text: "mildannerofc",
-        image: `https://github.com/mildannerofc.png`,
-        href: `https://github.com/mildannerofc/`,
+        image: `https://penguinmod.com/unknown_user.png`,
+        href: "https://studio.penguinmod.com/credits.html#",
     },
     {
         text: "nataliexists",
@@ -999,4 +1102,5 @@ export default {
     pmCostumeSubmittors: shuffle(pmCostumeSubmittors),
     pmPullRequestDevelopers: shuffle(pmPullRequestDevelopers),
     pmCodeUsedFrom: shuffle(pmCodeUsedFrom),
+    pmSupporters: shuffle(pmSupporters),
 };

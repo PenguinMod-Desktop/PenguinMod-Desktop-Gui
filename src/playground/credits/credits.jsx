@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import appTarget from '../app-target';
 import styles from './credits.css';
+import classNames from 'classnames';
 import { getInitialDarkMode } from '../../lib/tw-theme-hoc.jsx';
 
 // import fosshostLogo from './fosshost-light.png';
@@ -36,8 +37,10 @@ User.propTypes = {
     href: PropTypes.string
 };
 
-const UserList = ({ users }) => (
-    <div className={styles.users}>
+const UserList = ({ users, golden }) => (
+    <div className={classNames(styles.users, {
+        [styles.usersGolden]: golden,
+    })}>
         {users.map((data, index) => (
             <User
                 key={index}
@@ -47,7 +50,8 @@ const UserList = ({ users }) => (
     </div>
 );
 UserList.propTypes = {
-    users: PropTypes.arrayOf(PropTypes.object)
+    users: PropTypes.arrayOf(PropTypes.object),
+    golden: PropTypes.bool
 };
 
 const Credits = () => (
@@ -70,9 +74,20 @@ const Credits = () => (
             <a target="_blank" href="https://scratch.mit.edu/donate">
                 Donate to support Scratch.
             </a>
-            <br></br><br></br>
-            <a target="_blank" href="https://github.com/sponsors/GarboMuffin">
+            <br></br>
+            {/* TurboWarp no longer accepts donations */}
+            {/* <br></br>
+            <a href="https://github.com/sponsors/GarboMuffin">
                 Donate to support TurboWarp.
+            </a> */}
+            <h2>Our Supporters</h2>
+            <p>
+                We rely on the support of our users to keep running parts of the website for free.
+                You do not need to support PenguinMod if you do not want to, but it will help us run the services that power
+                our project sharing and other online features.
+            </p>
+            <a href="https://penguinmod.com/support">
+                Support PenguinMod
             </a>
             <h2>PenguinMod Desktop</h2>
             <p>
@@ -82,6 +97,9 @@ const Credits = () => (
                     <img src="https://avatars.githubusercontent.com/u/103709272?v=4" style={{ width: "128px" }}></img>
                 </a>
             </p>
+            <br></br>
+            <UserList users={UserData.pmSupporters} golden={true} />
+            <p><i>The list order is randomized on each refresh.</i></p>
             <h2>Contributors</h2>
             <p>
                 PenguinMod is made by a small bunch of developers.
@@ -224,12 +242,8 @@ const Credits = () => (
         <section>
             <p>
                 The TurboWarp project is made possible by the work of many volunteers.
-                <br></br>
-                You can check out TurboWarp's individual credits <a target="_blank" href="https://turbowarp.org/credits.html">here</a>.
-                <br></br>
-                <a target="_blank" href="https://github.com/sponsors/GarboMuffin">
-                    Donate to support TurboWarp.
-                </a>
+                <br />
+                You can check out TurboWarp's individual credits <a href="https://turbowarp.org/credits.html">here</a>.
             </p>
         </section>
         {/* RIP Fosshost */}
