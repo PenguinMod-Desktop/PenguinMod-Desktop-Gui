@@ -35,12 +35,12 @@ anonymous_cat1 (https://penguinmod.com/profile?user=anonymous_cat1)
 silverstero
 evilvowel_murdersscarykiller
 jpsAR (https://penguinmod.com/profile?user=jpsar) (discord: jpsar_)
-CarrotD1scord (https://penguinmod.com/profile?user=CarrotScr4tch) (discord: carrotd1scord)
+CarrotD1scord (https://penguinmod.com/profile?user=carrotp3nguin) (discord: carrotd1scord)
 anonygoose (https://penguinmod.com/profile?user=anonygoose)
 legume1
 ianyourgod (https://penguinmod.com/profile?user=ianyourgod)
 MubiLop (https://penguinmod.com/profile?user=mubilop)
-keura (https://penguinmod.com/profile?user=keura) (discord: thekeura)
+thekeura (https://penguinmod.com/profile?user=thekeura) (discord: thekeura)
 10000000_fireflies
 adurrina
 jeremygamer13 (https://penguinmod.com/profile?user=jeremygamer13)
@@ -75,6 +75,9 @@ gug. [iamgugreal1939] (https://penguinmod.com/profile?user=kiwi) (discord: iamgu
 aubreymcleen (https://penguinmod.com/profile?user=aubreymcleen) (discord: 2faceaub)
 kylomaskgamer (https://kylomaskgamer.ca/) (discord: kylomaskgamer)
 afk (https://penguinmod.com/profile?user=afk) (discord: aefarkalibastafinfein)
+dillonr
+UnbraveChimp (https://minerlegacy.net) (discord: UnbraveChimp)
+rooonym (https://penguinmod.com/profile?user=rooonym)
 `;
 const pmSupporterImage = (username) => {
     switch (username) {
