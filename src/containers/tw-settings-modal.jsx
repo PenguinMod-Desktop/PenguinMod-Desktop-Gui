@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 import {closeSettingsModal} from '../reducers/modals';
 import SettingsModalComponent from '../components/tw-settings-modal/settings-modal.jsx';
 import {defaultStageSize} from '../reducers/custom-stage-size';
-import { DesktopSettings } from '../lib/settings-store.js';
+import {setLivetests} from '../reducers/desktop-settings.js';
 
 const messages = defineMessages({
     newFramerate: {
@@ -120,11 +120,9 @@ class UsernameModal extends React.Component {
         this.props.vm.storeProjectOptions();
     }
     handleLiveTestsChange (e) {
-        DesktopSettings.update("livetests", e.target.checked);
-        alert('A restart is required for the change to take effect!')
-    }
-    getIsLiveTests() {
-        return DesktopSettings.get("livetests");
+        this.props.setLivetests(e.target.checked);
+        // eslint-disable-next-line no-alert, require-await
+        (async () => alert('A restart is required for the change to take effect!'))();
     }
     render () {
         const {
@@ -153,7 +151,7 @@ class UsernameModal extends React.Component {
                 onStagePresetUsed={this.handleStagePresetUsed}
                 onDisableCompilerChange={this.handleDisableCompilerChange}
                 onLiveTestsChange={this.handleLiveTestsChange}
-                isLiveTest={this.getIsLiveTests}
+                isLiveTest={this.props.desktopHasLivetests}
                 stageWidth={this.props.customStageSize.width}
                 stageHeight={this.props.customStageSize.height}
                 customStageSizeEnabled={
@@ -170,6 +168,7 @@ class UsernameModal extends React.Component {
 UsernameModal.propTypes = {
     intl: intlShape,
     onClose: PropTypes.func,
+    setLivetests: PropTypes.func,
     vm: PropTypes.shape({
         renderer: PropTypes.shape({
             setUseHighQualityRender: PropTypes.func
@@ -194,7 +193,8 @@ UsernameModal.propTypes = {
         width: PropTypes.number,
         height: PropTypes.number
     }),
-    disableCompiler: PropTypes.bool
+    disableCompiler: PropTypes.bool,
+    desktopHasLivetests: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
@@ -211,11 +211,13 @@ const mapStateToProps = state => ({
     dangerousOptimizations: state.scratchGui.tw.runtimeOptions.dangerousOptimizations,
     warpTimer: state.scratchGui.tw.compilerOptions.warpTimer,
     customStageSize: state.scratchGui.customStageSize,
-    disableCompiler: !state.scratchGui.tw.compilerOptions.enabled
+    disableCompiler: !state.scratchGui.tw.compilerOptions.enabled,
+    desktopHasLivetests: state.scratchGui.desktopSettings.livetests
 });
 
 const mapDispatchToProps = dispatch => ({
-    onClose: () => dispatch(closeSettingsModal())
+    onClose: () => dispatch(closeSettingsModal()),
+    setLivetests: livetests => dispatch(setLivetests(livetests))
 });
 
 export default injectIntl(connect(

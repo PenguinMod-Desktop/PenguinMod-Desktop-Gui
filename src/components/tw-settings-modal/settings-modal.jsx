@@ -644,7 +644,7 @@ const SettingsModalComponent = props => (
                     </Header>
                 </summary>
                 <LiveTests
-                    value={props.isLiveTest()}
+                    value={props.isLiveTest}
                     onChange={props.onLiveTestsChange}
                 />
             </details>
@@ -675,7 +675,7 @@ SettingsModalComponent.propTypes = {
     dangerousOptimizations: PropTypes.bool,
     onDisableCompilerChange: PropTypes.func,
     onLiveTestsChange: PropTypes.func,
-    isLiveTest: PropTypes.func,
+    isLiveTest: PropTypes.bool,
     onEnableDangerousOptimizationsChange: PropTypes.func,
     disableOffscreenRendering: PropTypes.bool,
     onDisableOffscreenRenderingChange: PropTypes.func

@@ -183,11 +183,11 @@ import jgJSONExtensionIcon from './penguinmod/extensions/json.png';
 
 // default icon if one is not made yet...
 import defaultExtensionIcon from './penguinmod/extensions/placeholder.png';
-import { DesktopSettings } from '../../settings-store';
+import { desktopSettingsInitialState } from '../../../reducers/desktop-settings.js';
 
 const urlParams = new URLSearchParams(location.search);
 const IsLocal = String(window.location.href).startsWith(`http://localhost:`);
-const IsLiveTests = urlParams.has('livetests') || DesktopSettings.get("livetests");
+const IsLiveTests = urlParams.has('livetests') || desktopSettingsInitialState.livetests;
 
 const menuItems = [
     {
