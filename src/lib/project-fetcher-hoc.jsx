@@ -155,21 +155,16 @@ const ProjectFetcherHOC = function (WrappedComponent) {
                 .then((projectAsset) => {
                     console.log(`project asset: ${projectAsset}`);
 
-                    // tw: If the project data appears to be HTML, then the result is probably an nginx 404 page,
+                    // pm: If the project data is missing, it *probably* doesn't exist
+                    // (barring some bad internet connection, which I don't feel like accounting for),
                     // and the "missing project" project should be loaded instead.
-                    // See: https://projects.scratch.mit.edu/9999999999999999999999
-                    if (projectAsset && projectAsset.data) {
-                        const firstChar = projectAsset.data[0];
-                        if (
-                            firstChar === "<" ||
-                            firstChar === "<".charCodeAt(0)
-                        ) {
-                            return storage.load(
-                                storage.AssetType.Project,
-                                MISSING_PROJECT_ID,
-                                storage.DataFormat.JSON,
-                            );
-                        }
+                    // TODO: have the server send an explicit "this doesn't exist"
+                    if (!projectAsset) {
+                        return storage.load(
+                            storage.AssetType.Project,
+                            MISSING_PROJECT_ID,
+                            storage.DataFormat.JSON,
+                        );
                     }
                     return projectAsset;
                 })
@@ -242,7 +237,7 @@ const ProjectFetcherHOC = function (WrappedComponent) {
         assetHost:
             "https://asset-cdn.penguinmod.com/file/penguinmod-warm-tier-s2-cf",
         projectHost:
-            "https://projects.penguinmod.com/api/v1/projects/getProject?requestType=protobuf&safe=true&projectID",
+            "https://projects.penguinmod.com/api/v1/projects/getProject?requestType=protobuf&projectID",
     };
 
     const mapStateToProps = (state) => ({
