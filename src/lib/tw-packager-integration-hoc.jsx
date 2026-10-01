@@ -5,9 +5,9 @@ import log from './log';
 import { getIsShowingProject } from '../reducers/project-state';
 
 const PACKAGER_ORIGIN =
-    process.env.NODE_ENV === "production"
-        ? "http://tauri.localhost"
-        : "http://127.0.0.1:1430";
+    process.env.NODE_ENV === 'production'
+        ? 'http://tauri.localhost'
+        : 'http://127.0.0.1:1430';
 
 const PackagerIntegrationHOC = function (WrappedComponent) {
     class PackagerIntegrationComponent extends React.Component {
@@ -27,7 +27,7 @@ const PackagerIntegrationHOC = function (WrappedComponent) {
                 // Setup events
 
                 const current = window.__TAURI__.webviewWindow.getCurrentWebviewWindow();
-                const label = "packager"
+                const label = 'packager';
                 const postMessage = (name, data) => current.emitTo(label, 'import', {
                     type: name,
                     ...data
@@ -51,10 +51,13 @@ const PackagerIntegrationHOC = function (WrappedComponent) {
                 });
 
                 // Open packager window
-                const path = `${process.env.ROUTING_STYLE === "wildcard" ? "packager" : "packager.html"}?import_from_tauri`;
+                const path = `${process.env.ROUTING_STYLE === 'wildcard'
+                    ? 'packager' : 'packager.html'}?import_from_tauri`;
+                
+                // eslint-disable-next-line no-new
                 new window.__TAURI__.webviewWindow.WebviewWindow(label, {
                     url: path,
-                    title: "Packager",
+                    title: 'Packager',
                     width: 800,
                     height: 600
                 });

@@ -1082,6 +1082,9 @@ export default async function ({ addon, console, msg }) {
             child.innerText = newValue;
           }
         }
+
+        if (child.tagName === 'NEXT')
+          child.remove();
       }
 
       if (opcodeData.mutate) {
@@ -1112,8 +1115,12 @@ export default async function ({ addon, console, msg }) {
       }
 
       // Remove the old block and insert the new one.
+      const oldTarget = block.nextConnection?.targetConnection;
+      if (oldTarget) block.nextConnection?.disconnect?.();
       block.dispose();
       const newBlock = pasteBlockXML(workspace, xml);
+      if (newBlock.nextConnection && oldTarget)
+        newBlock.nextConnection.connect(oldTarget);
 
       if (parentConnection) {
         // Search for the same type of connection on the new block as on the old block.

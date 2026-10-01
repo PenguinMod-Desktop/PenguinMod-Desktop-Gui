@@ -220,7 +220,8 @@ const pmDevelopers = [
     'tnix100',
     'RedMan13',
     'SharkPool-SP',
-    'showierdata9978'
+    'showierdata9978',
+    'DogeisCut'
 ].map(fromHardcodedGithub);
 
 const pmPullRequestDevelopers = [ // these people made a PR that got merged, or got a dev to add something they made
@@ -288,11 +289,6 @@ const pmPullRequestDevelopers = [ // these people made a PR that got merged, or 
         text: 'NotCryptid',
         image: `https://penguinmod.com/unknown_user.png`,
         href: `https://github.com/NotCryptid/`,
-    },
-    {
-        text: 'DogeisCut',
-        image: `https://github.com/DogeisCut.png`,
-        href: `https://github.com/Dogeiscut/`,
     },
     {
         text: 'thekeura',
